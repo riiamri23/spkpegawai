@@ -19,9 +19,14 @@ class Calonpenerima extends CI_Controller {
 
     // awal tampil index
     public function index() {
+        $batch = $this->input->get('batch');
+        if($batch == null){
+            redirect('batch');
+        }
         $data['title'] = 'Data Calon Pegawai';
-        $data['data'] = $this->model->get_all($this->tabel);
+        $data['data'] = $this->model->get_where($this->tabel, ["batch"=> $batch]);
         // $this->load->view('vcalonpenerima', $data);
+        $data['batch'] = $batch;
         $data['page'] = 'contents/pegawai/index';
 
         $this->load->view('app.php', $data);

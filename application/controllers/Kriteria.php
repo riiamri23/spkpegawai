@@ -64,7 +64,9 @@ class Kriteria extends CI_Controller {
             $data['qdata'] = $this->model->get_byid($this->tabel,$idu);
             $data['title'] = 'Edit Kriteria';
             $data['aksi']  = 'aksi_edit';
-            $this->load->view('vformkriteria', $data);
+            $data['page'] = 'contents/kriteria/form';
+    
+            $this->load->view('app.php', $data);
         } 
         elseif ($mau_ke == "aksi_add") {
             // jika uri segmentasinya AKSI_ADD sebagai fungsi untuk insert data

@@ -19,9 +19,15 @@ class Normalisasidata extends CI_Controller {
 
     // awal tampil index
     public function index() {
+        $batch = $this->input->get('batch');
+        if($batch == null){
+            redirect('batch');
+        }
         $data['title'] = 'Data Penerima Pegawai Ternormalisasi';
-        $data['data'] = $this->model->get_all($this->tabel);
-        $data['batches'] = $this->model->get_all($this->tabelBatch);
+        // $data['data'] = $this->model->get_all($this->tabel);
+        $data['data'] = $this->model->get_where($this->tabel, ['batch'=>$batch]);
+        $data['batch'] = $batch;
+        // $data['batches'] = $this->model->get_all($this->tabelBatch);
         // $this->load->view('vnormalisasidata', $data);
 
         $data['page'] = 'contents/normalisasi/index';
@@ -232,7 +238,7 @@ class Normalisasidata extends CI_Controller {
         }
 
           $this->session->set_flashdata("Pesan", "<div class=\"alert alert-success\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data berhasil Di Normalisasi</div>");
-        redirect('normalisasidata');
+        redirect('normalisasidata?batch='.$batch);
     }
 
 }

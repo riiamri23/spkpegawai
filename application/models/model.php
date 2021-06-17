@@ -48,6 +48,15 @@ class Model extends CI_Model {
         }
     }
 
+    // function get_bybatch($tabel,$batch) {
+    //     $this->db->from($tabel);
+    //     $this->db->where('batch', $batch);
+    //     $query = $this->db->get();
+    //     if ($query->num_rows() == 1) {
+    //         return $query->result();
+    //     }
+    // }
+
 
     function get_insert($tabel,$data) {
         $this->db->insert($tabel, $data);

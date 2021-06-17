@@ -13,6 +13,8 @@
 
                         <a href="<?php echo base_url() ?>calonpenerima/hapusall" class="btn btn-sm btn-danger" onclick="return confirm('Anda Yakin ingin menghapus semua data ini?')">
                         <i class="mdi mdi-delete"></i> Hapus Semua Data</a> 
+                        <a href="<?php echo base_url() ?>normalisasidata?batch=<?=$batch?>" class="btn btn-sm btn-primary">
+                        <i class="mdi mdi-plus"></i> Lihat Normalisasi Calon Pegawai</a> 
                         <br><br>
 
                         <div class="table-responsive">

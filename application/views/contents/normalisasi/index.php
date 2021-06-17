@@ -9,31 +9,10 @@
                     <div class="col-md-12 mx-auto">
                         <p><?php echo $this->session->flashdata('Pesan') ?> </p> 
                         <form action="<?php echo base_url() ?>normalisasidata/proses" method="post">
-                                <input type="submit" class="btn btn-sm btn-primary" value="Proses Normalisasi"> 
-                                <a href="<?php echo base_url() ?>normalisasidata/hapusall" class="btn btn-sm btn-danger" onclick="return confirm('Anda Yakin ingin menghapus semua data ini?')">
-                                <i class="glyphicon glyphicon-trash"></i> Hapus Semua Data</a> 
-                            
-                                <br><br>
-
-                                <div class="col-md-6">
-                                    <label for="">Pilih Tahun Data Normalisasi</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <select name="batch" class="form-control" required>
-                                        <option value="">Pilih Batch</option>
-                                        <?php
-                                        if(!empty($batches)){
-                                            foreach($batches as $batch){
-                                        ?>
-                                        <option value="<?=$batch->id?>"><?=$batch->batch?></option>
-
-                                        <?php
-
-                                            }
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
+                            <input type="hidden" name="batch" value="<?=$batch?>">
+                            <input type="submit" class="btn btn-sm btn-primary" value="Proses Normalisasi"> 
+                            <!-- <a href="<?php echo base_url() ?>normalisasidata/hapusall" class="btn btn-sm btn-danger" onclick="return confirm('Anda Yakin ingin menghapus semua data ini?')">
+                            <i class="glyphicon glyphicon-trash"></i> Hapus Semua Data</a>  -->
 
                         </form>
 

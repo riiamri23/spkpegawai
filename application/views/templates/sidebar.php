@@ -38,21 +38,23 @@
             </ul>
         </li>
         <li>
-        <a href="#ui-elements" data-toggle="collapse" aria-expanded="false">
+        
+        <a href="<?=base_url()?>batch">
             <span class="link-title">Data Calon Pegawai</span>
             <i class="mdi mdi-file-document link-icon"></i>
         </a>
-        <ul class="collapse navigation-submenu" id="ui-elements">
-            <li>
-                <a href="<?=base_url()?>batch">Calon Pegawai</a>
-            </li>
-            <!-- <li>
-                <a href="<?=base_url()?>batch">Calon Pegawai2</a>
-            </li> -->
-            <li>
-                <a href="<?=base_url()?>normalisasidata">Normalisasi Data Pegawai</a>
-            </li>
-        </ul>
+        <!-- <a href="#ui-elements" data-toggle="collapse" aria-expanded="false"> -->
+            <!-- <span class="link-title">Data Calon Pegawai</span> -->
+            <!-- <i class="mdi mdi-file-document link-icon"></i> -->
+        <!-- </a> -->
+        <!-- <ul class="collapse navigation-submenu" id="ui-elements"> -->
+            <!-- <li> -->
+                <!-- <a href="<?=base_url()?>batch">Calon Pegawai</a> -->
+            <!-- </li> -->
+            <!-- <li> -->
+                <!-- <a href="<?=base_url()?>normalisasidata">Normalisasi Data Pegawai</a> -->
+            <!-- </li> -->
+        <!-- </ul> -->
         </li>
         
         <li>

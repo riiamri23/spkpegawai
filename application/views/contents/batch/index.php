@@ -32,9 +32,9 @@
                                             <tr> 
                                                 <td><?php echo $no ?></td>
                                                 <td><?php echo $row->batch ?></td> 
-                                                <td><a href="<?php echo base_url() ?>calonpenerima?batch=<?php echo $row->id ?>" class="btn btn-primary btn-sm"><i class="mdi mdi-eye"></i></a> 
+                                                <td><a href="<?php echo base_url() ?>calonpegawai?batch=<?php echo $row->id ?>" class="btn btn-primary btn-sm"><i class="mdi mdi-eye"></i></a> 
                                                 <a href="<?php echo base_url() ?>batch/form/edit/<?php echo $row->id ?>" class="btn btn-info btn-sm"><i class="mdi mdi-pencil"></i></a> 
-                                                <!-- <a href="<?php echo base_url() ?>calonpenerima/form/edit/<?php echo $row->id ?>" class="btn btn-danger btn-sm"><i class="mdi mdi-delete"></i></a></td>  -->
+                                                <!-- <a href="<?php echo base_url() ?>calonpegawai/form/edit/<?php echo $row->id ?>" class="btn btn-danger btn-sm"><i class="mdi mdi-delete"></i></a></td>  -->
                                             </tr>
                                             <?php
                                             

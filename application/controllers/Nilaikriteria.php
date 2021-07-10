@@ -31,14 +31,19 @@ class Nilaikriteria extends CI_Controller {
            $c1_2=$r->c1_2;
            $c1_3=$r->c1_3;
            $c1_4=$r->c1_4;
+           $c1_5=$r->c1_5;
            $c2_1=$r->c2_1;
            $c2_2=$r->c2_2;
            $c2_3=$r->c2_3;
+           $c2_4=$r->c2_4;
            $c3_1=$r->c3_1;
            $c3_2=$r->c3_2;
+           $c3_3=$r->c3_3;
            $c4_1=$r->c4_1;
+           $c4_2=$r->c4_2;
+           $c5_1=$r->c5_1;
             $this->model->deleteall('perbandingan_kriteria');
-        for ($i=1; $i <= 5; $i++) { 
+        for ($i=1; $i <= 6; $i++) { 
             if ($i==1) {
                 $data['kriteria'] = "c1";
                 $data['c1']  = 1;
@@ -46,6 +51,7 @@ class Nilaikriteria extends CI_Controller {
                 $data['c3'] = $c1_2;
                 $data['c4'] = $c1_3;
                 $data['c5'] = $c1_4;
+                $data['c6'] = $c1_5;
                 $this->model->get_insert("perbandingan_kriteria",$data);
             }else if ($i==2) {
                 $data['kriteria'] = "c2";
@@ -54,7 +60,8 @@ class Nilaikriteria extends CI_Controller {
                 $data['c3'] = $c2_1;
                 $data['c4'] = $c2_2;
                 $data['c5'] = $c2_3;
-                 $this->model->get_insert("perbandingan_kriteria",$data);
+                $data['c6'] = $c2_4;
+                $this->model->get_insert("perbandingan_kriteria",$data);
             }
             else if ($i==3) {
                 $data['kriteria'] = "c3";
@@ -63,7 +70,8 @@ class Nilaikriteria extends CI_Controller {
                 $data['c3']  = 1;
                 $data['c4'] = $c3_1;
                 $data['c5'] = $c3_2;
-                 $this->model->get_insert("perbandingan_kriteria",$data);
+                $data['c6'] = $c3_3;
+                $this->model->get_insert("perbandingan_kriteria",$data);
             }
             else if ($i==4) {
                 $data['kriteria'] = "c4";
@@ -72,7 +80,8 @@ class Nilaikriteria extends CI_Controller {
                 $data['c3']  = 1/$c3_1;
                 $data['c4']  = 1;
                 $data['c5'] = $c4_1;
-                 $this->model->get_insert("perbandingan_kriteria",$data);
+                $data['c6'] = $c4_2;
+                $this->model->get_insert("perbandingan_kriteria",$data);
             }
             else if ($i==5) {
                 $data['kriteria'] = "c5";
@@ -81,7 +90,18 @@ class Nilaikriteria extends CI_Controller {
                 $data['c3']  = 1/$c3_2;
                 $data['c4']  = 1/$c4_1;
                 $data['c5']  = 1;
-                 $this->model->get_insert("perbandingan_kriteria",$data);
+                $data['c6']  = $c5_1;
+                $this->model->get_insert("perbandingan_kriteria",$data);
+            }else if($i == 6){
+                $data['kriteria'] = "c6";
+                $data['c1']  = 1/$c2_3;
+                $data['c2']  = 1/$c3_2;
+                $data['c3']  = 1/$c4_1;
+                $data['c4']  = 1/$c4_2;
+                $data['c5']  = 1/$c5_1;
+                $data['c6']  = 1;
+                $this->model->get_insert("perbandingan_kriteria",$data);
+
             }
         }
 
@@ -101,12 +121,17 @@ class Nilaikriteria extends CI_Controller {
         $c1_2 = $this->input->post('c1_2');
         $c1_3 = $this->input->post('c1_3');
         $c1_4 = $this->input->post('c1_4');
+        $c1_5 = $this->input->post('c1_5');
         $c2_1 = $this->input->post('c2_1');
         $c2_2 = $this->input->post('c2_2');
         $c2_3 = $this->input->post('c2_3');
+        $c2_4 = $this->input->post('c2_4');
         $c3_1 = $this->input->post('c3_1');
         $c3_2 = $this->input->post('c3_2');
+        $c3_3 = $this->input->post('c3_3');
         $c4_1 = $this->input->post('c4_1');
+        $c4_2 = $this->input->post('c4_2');
+        $c5_1 = $this->input->post('c5_1');
         
         // mengarahkan fungsi form sesuai dengan uri segmentnya
         if ($mau_ke == "add") {
@@ -131,15 +156,20 @@ class Nilaikriteria extends CI_Controller {
             // jika uri segmentasinya AKSI_ADD sebagai fungsi untuk insert data
               $data = array(
                 'c1_1'  => $c1_1,
-                'c1_2'   => $c1_2,
-                'c1_3'     => $c1_3,
-                'c1_4'     => $c1_4,
+                'c1_2'  => $c1_2,
+                'c1_3'  => $c1_3,
+                'c1_4'  => $c1_4,
+                'c1_5'  => $c1_5,
                 'c2_1'  => $c2_1,
-                'c2_2'   => $c2_2,
-                'c2_3'     => $c2_3,
+                'c2_2'  => $c2_2,
+                'c2_3'  => $c2_3,
+                'c2_4'  => $c2_4,
                 'c3_1'  => $c3_1,
-                'c3_2'   => $c3_2,
-                'c4_1'  => $c4_1
+                'c3_2'  => $c3_2,
+                'c3_3'  => $c3_3,
+                'c4_1'  => $c4_1,
+                'c4_2'  => $c4_2,
+                'c5_1'  => $c5_1
             );
     
             $this->model->get_update("nilaikriteria","1",$data);
@@ -147,8 +177,5 @@ class Nilaikriteria extends CI_Controller {
             redirect('nilaikriteria/form/add');
         } 
     }
-
-
-
 
 }

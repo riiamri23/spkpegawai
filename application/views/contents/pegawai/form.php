@@ -1,30 +1,34 @@
 
 <?php
-$kriterias = array("wawancara"=> ["sangat baik", "baik", "kurang baik"], "pendidikan" => ["sd", "smp", "sma/smk", "d3", "s1"], "pengalaman"=>["sangat berpengalaman", "baik", "kurang berpengalaman"], "karakter"=> ["sangat aktif", "aktif", "kurang aktif"],);
-$valkriterias = ['', '', '', ''];
+$kriterias = array(
+    "wawancara"=> ["Sangat Buruk", "Buruk", "Cukup", "Baik", "Sangat Baik"], 
+    "pendidikan" => ["SMA/SMK", "D3", "S1"], 
+    "pengalaman"=>["Belum Ada/Freshgraduate", "1 - < 2 Tahun", "> 2 Tahun"], 
+    "penampilan"=> ["Sangat Buruk", "Buruk", "Cukup", "Baik", "Sangat Baik"],
+    "sertifikat"=> ["Tidak Ada", "Ada"],
+);
 if ($aksi == 'aksi_add') {
     $id = "";
-    $batch = "";
+    // $batch = "";
     $nama = "";
-    // $wawancara = "";
-    // $pendidikan = "";
-    // $pengalaman = "";
-    // $karakter = "";
-    $gaji = "";
+    $usia = "";
+    $valkriterias = ['', '', '', '', ''];
 } else {
     foreach ($qdata as $rowdata) {
         $id = $rowdata->id;
-        // $nis = $rowdata->nis;
-        $batch = $rowdata->batch;
+        // $batch = $rowdata->batch;
         $nama = $rowdata->nama;
-        $valkriterias = [$rowdata->wawancara, $rowdata->pendidikan, $rowdata->pengalaman, $rowdata->karakter];
-        // $wawancara = $rowdata->wawancara;
-        // $pendidikan = $rowdata->pendidikan;
-        // $pengalaman = $rowdata->pengalaman;
-        // $karakter = $rowdata->karakter;
+        $valkriterias = [
+            $rowdata->wawancara, 
+            $rowdata->pendidikan, 
+            $rowdata->pengalaman, 
+            $rowdata->penampilan, 
+            $rowdata->sertifikat
+        ];
 
-        $gaji = $rowdata->gaji;
+        $usia = $rowdata->usia;
     }
+
 }
 ?> 
 <div class="col-lg-12">
@@ -34,31 +38,31 @@ if ($aksi == 'aksi_add') {
             <div class="item-wrapper">
                 <div class="row mb-3">
                     <div class="col-md-12 mx-auto">
-                    <form action="<?php echo base_url() ?>calonpenerima/form/<?php echo $aksi ?>" method="post">
+                    <form action="<?php echo base_url() ?>calonpegawai/form/<?php echo $aksi ?>" method="post">
+                        <input type="hidden" name="id" class="form-control" value="<?php echo $id; ?>"> 
+                        <input type="hidden" name="batch" required class="form-control" value="<?php echo $batch ?>"> 
                         <table class="table">
-                            <tr> 
+                            <!-- <tr> 
                                 <td style="width:15%;">Batch</td> 
                                 <td> 
                                     <div class="col-sm-6"> 
-                                        <input type="hidden" name="id" class="form-control" value="<?php echo $id; ?>"> 
                                         <select name="batch" required class="form-control">
                                             <?php 
-                                                if(!empty($batches)){
-                                                    foreach($batches as $batch){
+                                                // if(!empty($batches)){
+                                                //     foreach($batches as $batch){
                                             ?>
-                                                <option value="<?=$batch->id?>" <?=$batch->id == $batch ? 'selected':''?>><?=$batch->batch?></option>
 
                                             <?php
 
-                                                    }
+                                                //     }
                                                 
-                                                }
+                                                // }
                                             ?>
 
                                         </select>
                                     </div> 
                                 </td> 
-                            </tr> 
+                            </tr>  -->
                             <tr> 
                                 <td>Nama</td> 
                                 <td> 
@@ -97,10 +101,10 @@ if ($aksi == 'aksi_add') {
                                 }
                             ?>
                             <tr> 
-                                <td>Gaji</td> 
+                                <td>Usia</td> 
                                 <td> 
                                     <div class="col-sm-6"> 
-                                        <input type="number" name="gaji" required class="form-control" value="<?php echo $gaji ?>"> 
+                                        <input type="number" name="usia" required class="form-control" value="<?php echo $usia ?>"> 
                                     </div>
                                 </td>
                             </tr> 

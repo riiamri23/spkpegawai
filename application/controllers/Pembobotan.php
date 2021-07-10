@@ -20,7 +20,7 @@ class Pembobotan extends CI_Controller {
     public function index() {
         $data['title'] = 'Pembobotan kriteria AHP';
         $data['data'] = $this->model->get_all($this->tabel,"asc");
-         $data['data_eigen'] = $this->model->get_eigen();
+        $data['data_eigen'] = $this->model->get_eigen();
         $data['data_bobot'] = $this->model->get_bobot();
         // $this->load->view('vpembobotan', $data);
 
@@ -39,8 +39,8 @@ class Pembobotan extends CI_Controller {
              // $query="SELECT * FROM perbandingan_kriteria order by id asc";
              // $result=$this->db->query($query)->result_array();
              foreach ($dt as $r) {
-                $matriks_a[] = array($r->c1,     $r->c2,      $r->c3,      $r->c4,  $r->c5);
-                $matriks_b[] = array($r->c1,     $r->c2,      $r->c3,      $r->c4,  $r->c5);
+                $matriks_a[] = array($r->c1,     $r->c2,      $r->c3,      $r->c4,  $r->c5, $r->c6);
+                $matriks_b[] = array($r->c1,     $r->c2,      $r->c3,      $r->c4,  $r->c5, $r->c6);
              }
              $hasil = $this->perkalian_matriks($matriks_a, $matriks_b);
           //   echo "<table border='1' cellspacing='0' cellpadding='5'>";
@@ -55,6 +55,7 @@ class Pembobotan extends CI_Controller {
                 $c3 = $hasil[$i][2];
                 $c4 = $hasil[$i][3];
                 $c5 = $hasil[$i][4];
+                $c6 = $hasil[$i][5];
 
                 $data = array(
                     'kriteria'=>$nma,
@@ -63,7 +64,8 @@ class Pembobotan extends CI_Controller {
                     'c3'=>$c3,
                     'c4'=>$c4,
                     'c5'=>$c5,
-                    'hasil'=>$c1+$c2+$c3+$c4+$c5
+                    'c6'=>$c6,
+                    'hasil'=>$c1+$c2+$c3+$c4+$c5+$c6
                       
                 );
                 $this->model->get_insert("hasil_iterasi_1",$data);

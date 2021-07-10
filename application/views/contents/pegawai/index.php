@@ -1,20 +1,20 @@
 
 <div class="col-lg-12">
     <div class="grid">
-        <p class="grid-header">Form Nilai Krteria</p>
+        <p class="grid-header">Pegawai</p>
         <div class="grid-body">
             <div class="item-wrapper">
                 <div class="row mb-3">
                     <div class="col-md-12 mx-auto">
                         <p><?php echo $this->session->flashdata('Pesan') ?> </p> 
-                        <a href="<?php echo base_url() ?>calonpenerima/form/add" class="btn btn-sm btn-primary">
+                        <a href="<?php echo base_url() ?>calonpegawai/form/add?batch=<?=$batch?>" class="btn btn-sm btn-primary">
                         <i class="mdi mdi-plus"></i> Tambah Calon Pegawai</a> 
                         
 
-                        <a href="<?php echo base_url() ?>calonpenerima/hapusall" class="btn btn-sm btn-danger" onclick="return confirm('Anda Yakin ingin menghapus semua data ini?')">
+                        <a href="<?php echo base_url() ?>calonpegawai/hapusall" class="btn btn-sm btn-danger" onclick="return confirm('Anda Yakin ingin menghapus semua data ini?')">
                         <i class="mdi mdi-delete"></i> Hapus Semua Data</a> 
-                        <a href="<?php echo base_url() ?>normalisasidata?batch=<?=$batch?>" class="btn btn-sm btn-primary">
-                        <i class="mdi mdi-plus"></i> Lihat Normalisasi Calon Pegawai</a> 
+                        <a href="<?php echo base_url() ?>normalisasidata?batch=<?=$batch?>" class="btn btn-sm btn-success">
+                        <i class="mdi mdi-eye"></i> Lihat Normalisasi Calon Pegawai</a> 
                         <br><br>
 
                         <div class="table-responsive">
@@ -24,11 +24,12 @@
                                         <th>No</th> 
                                         <th>Batch</th>
                                         <th>Nama</th> 
+                                        <th>Usia</th>
+                                        <th>Pengalaman Kerja</th>
+                                        <th>Pendidikan Terakhir</th>
+                                        <th>Sertifikat Keahlian</th>
                                         <th>Wawancara</th>
-                                        <th>Pendidikan</th>
-                                        <th>Pengalaman</th>
-                                        <th>Karakter</th>
-                                        <th>Gaji</th>
+                                        <th>Penampilan</th>
                                         <th>Aksi</th> 
                                     </tr> 
                                 </thead> 
@@ -47,13 +48,14 @@
                                                 <td><?php echo $no ?></td>
                                                 <td><?=$row->batch?></td>
                                                 <td><?php echo $row->nama ?></td> 
-                                                <td><?=$row->wawancara?></td>
-                                                <td><?=$row->pendidikan?></td>
+                                                <td><?=$row->usia?></td>
                                                 <td><?=$row->pengalaman?></td>
-                                                <td><?=$row->karakter?></td>
-                                                <td><?=$row->gaji?></td>
-                                                <td><a href="<?php echo base_url() ?>calonpenerima/form/edit/<?php echo $row->id ?>" class="btn btn-info btn-sm"><i class="mdi mdi-pencil"></i></a> 
-                                                <a href="<?php echo base_url() ?>calonpenerima/hapus/<?php echo $row->id ?>" class="btn btn-danger btn-sm" onclick="return confirm('Anda Yakin menghapus data ini?')"><i class="mdi mdi-delete"></i></a>
+                                                <td><?=$row->pendidikan?></td>
+                                                <td><?=$row->sertifikat?></td>
+                                                <td><?=$row->wawancara?></td>
+                                                <td><?=$row->penampilan?></td>
+                                                <td><a href="<?php echo base_url() ?>calonpegawai/form/edit/<?php echo $row->id ?>?batch=<?=$batch?>" class="btn btn-info btn-sm"><i class="mdi mdi-pencil"></i></a> 
+                                                <a href="<?php echo base_url() ?>calonpegawai/hapus/<?php echo $row->id ?>?batch=<?=$batch?>" class="btn btn-danger btn-sm" onclick="return confirm('Anda Yakin menghapus data ini?')"><i class="mdi mdi-delete"></i></a>
                                                 
                                                 </td> 
                                             </tr> 

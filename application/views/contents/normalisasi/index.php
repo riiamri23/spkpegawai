@@ -22,11 +22,12 @@
                                     <th>No</th> 
                                     <th>Batch</th>
                                     <th>Nama</th> 
-                                    <th>Wawancara</th>
-                                    <th>Pendidikan</th>
+                                    <th>Usia</th>
                                     <th>Pengalaman</th>
-                                    <th>Karakter</th>
-                                    <th>Gaji</th>
+                                    <th>Pendidikan</th>
+                                    <th>Sertifikat</th>
+                                    <th>Wawancara</th>
+                                    <th>Penampilan</th>
                                 </tr> 
                             </thead> 
                             <tbody> 
@@ -47,8 +48,9 @@
                                             <td><?=$row->wawancara?></td>
                                             <td><?=$row->pendidikan?></td>
                                             <td><?=$row->pengalaman?></td>
-                                            <td><?=$row->karakter?></td>
-                                            <td><?=$row->gaji?></td>
+                                            <td><?=$row->sertifikat?></td>
+                                            <td><?=$row->penampilan?></td>
+                                            <td><?=$row->usia?></td>
                                         
                                         </tr> 
                                         <?php

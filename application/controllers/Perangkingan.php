@@ -41,6 +41,7 @@ class Perangkingan extends CI_Controller {
         $c3=$this->db->get_where('hasil_bobot_ahp', array('kode' => "c3"))->row()->bobot;
         $c4=$this->db->get_where('hasil_bobot_ahp', array('kode' => "c4"))->row()->bobot;
         $c5=$this->db->get_where('hasil_bobot_ahp', array('kode' => "c5"))->row()->bobot;
+        $c6=$this->db->get_where('hasil_bobot_ahp', array('kode' => "c6"))->row()->bobot;
 
         $this->db->where('batch',$batch);  
         $data = $this->db->get('hasil_normalisasi');
@@ -49,24 +50,26 @@ class Perangkingan extends CI_Controller {
            $this->model->delete_dum('hasil_perangkingan',$batch);
             foreach ($data->result() as $row) {
                 $nama = $row->nama;
-                $nc1 = $row->wawancara;
-                $nc2 = $row->pendidikan;
-                $nc3 = $row->pengalaman;
-                $nc4 = $row->karakter;
-                $nc5 = $row->gaji;
+                $nc1 = $row->usia;
+                $nc2 = $row->pengalaman;
+                $nc3 = $row->pendidikan;
+                $nc4 = $row->sertifikat;
+                $nc5 = $row->wawancara;
+                $nc6 = $row->penampilan;
                 // var_dump($nc1);
 
-                $hasil = ($c1*$nc1)+($c2*$nc2)+($c3*$nc3)+($c4*$nc4)+($c5*$nc5);
+                $hasil = ($c1*$nc1)+($c2*$nc2)+($c3*$nc3)+($c4*$nc4)+($c5*$nc5)+($c6*$nc6);
                 // var_dump($hasil);
                   $data = array(
                     'id'            => $row->id,
                     'batch'         => $batch,
                     'nama'          => $nama,
-                    'wawancara'     => $nc1,
-                    'pendidikan'    => $nc2,
-                    'pengalaman'    => $nc3,
-                    'karakter'      => $nc4,
-                    'gaji'          => $nc5,
+                    'usia'          => $nc1,
+                    'pengalaman'    => $nc2,
+                    'pendidikan'    => $nc3,
+                    'sertifikat'    => $nc4,
+                    'wawancara'     => $nc5,
+                    'penampilan'    => $nc6,
                     'hasil'         => number_format((float)$hasil, 3, '.', '')
                       
                 );

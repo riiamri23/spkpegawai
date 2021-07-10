@@ -125,7 +125,7 @@ class Model extends CI_Model {
       if ($batch!=null) {
           $where.=" and a.batch = '$batch'";
       }
-      $sql="SELECT a.*,h.hasil,h.rangking FROM calon_penerima a 
+      $sql="SELECT a.*,h.hasil,h.rangking FROM calon_pegawai a 
       LEFT JOIN hasil_perangkingan h ON h.id = a.id
       where $where
       ORDER BY h.rangking ASC";
@@ -136,7 +136,7 @@ class Model extends CI_Model {
             return $query->result();
         }
     }
-     function gethasilperangkingan($batch=1)
+     function gethasilperangkingan($batch)
     {
       $sql="SELECT * FROM hasil_perangkingan 
       where batch = $batch

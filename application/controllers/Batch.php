@@ -21,7 +21,6 @@ class Batch extends CI_Controller {
     public function index() {
         $data['title'] = 'Data Calon Pegawai';
         $data['data'] = $this->model->get_all($this->tabel);
-        // $this->load->view('vcalonpenerima', $data);
         $data['page'] = 'contents/batch/index';
 
         $this->load->view('app.php', $data);
@@ -44,8 +43,6 @@ class Batch extends CI_Controller {
             $data['title'] = 'Tambah Batch';
             $data['aksi'] = 'aksi_add';
             $data['batches'] = $this->model->get_all($this->tabel);
-            // print_r($data['batches']);
-            // $this->load->view('vformcalonpenerima', $data);
             $data['page'] = 'contents/batch/form';
     
             $this->load->view('app.php', $data);

@@ -15,7 +15,6 @@
                     <div class="content-viewport">
                         <div class="row">
                             <div class="col-12 py-5">
-                                <h4><?=$title?></h4>
                                 <!-- <p class="text-gray">Welcome aboard, Allen Clerk</p> -->
                             </div>
                         </div>

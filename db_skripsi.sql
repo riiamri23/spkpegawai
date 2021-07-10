@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 13, 2021 at 03:44 PM
+-- Generation Time: Jun 24, 2021 at 10:34 AM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.6
 
@@ -32,13 +32,6 @@ CREATE TABLE `batch` (
   `batch` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `batch`
---
-
-INSERT INTO `batch` (`id`, `batch`) VALUES
-(1, 'batch 1 penerimaan karyawan IT Developer');
-
 -- --------------------------------------------------------
 
 --
@@ -47,69 +40,47 @@ INSERT INTO `batch` (`id`, `batch`) VALUES
 
 CREATE TABLE `calon_pegawai` (
   `id` int(11) NOT NULL,
-  `nama` varchar(255) DEFAULT NULL,
-  `batch` int(11) DEFAULT NULL,
-  `wawancara` int(11) DEFAULT NULL,
-  `pendidikan` int(11) DEFAULT NULL,
-  `pengalaman` int(11) DEFAULT NULL,
-  `karakter` int(11) DEFAULT NULL,
-  `gaji` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `calon_pegawai`
---
-
-INSERT INTO `calon_pegawai` (`id`, `nama`, `batch`, `wawancara`, `pendidikan`, `pengalaman`, `karakter`, `gaji`) VALUES
-(1, 'Syaeful Amri', 1, 1, 4, 7, 9, 12),
-(2, 'Yudi Herdiana', 1, 2, 6, 8, 10, 11),
-(3, 'Indigo Nugra', 1, 1, 6, 7, 9, 11),
-(4, 'Hesdin Rudinar', 1, 2, 5, 8, 10, 13);
+  `nama` varchar(30) NOT NULL,
+  `batch` int(4) NOT NULL,
+  `wawancara` enum('Sangat Buruk','Buruk','Cukup','Baik','Sangat Baik') NOT NULL,
+  `pendidikan` enum('SMA/SMK','D3','S1') NOT NULL,
+  `pengalaman` enum('Belum ada/Freshgraduate','1 - < 2 Tahun','> 2 Tahun') NOT NULL,
+  `usia` int(255) NOT NULL,
+  `sertifikat` enum('Tidak Ada','Ada') NOT NULL,
+  `penampilan` enum('Sangat Buruk','Buruk','Cukup','Baik','Sangat Baik') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `calon_penerima`
+-- Table structure for table `calon_pegawai_konversi`
 --
 
-CREATE TABLE `calon_penerima` (
+CREATE TABLE `calon_pegawai_konversi` (
   `id` int(11) NOT NULL,
   `nama` varchar(30) NOT NULL,
   `batch` int(4) NOT NULL,
-  `wawancara` enum('sangat baik','baik','kurang baik') NOT NULL,
-  `pendidikan` enum('sd','smp','sma/smk','d3','s1') NOT NULL,
-  `pengalaman` enum('sangat berpengalaman','berpengalaman','kurang berpengalaman') NOT NULL,
-  `karakter` enum('sangat aktif','aktif','kurang aktif') NOT NULL,
-  `gaji` int(11) NOT NULL
+  `wawancara` int(255) NOT NULL,
+  `pendidikan` int(255) NOT NULL,
+  `pengalaman` int(255) NOT NULL,
+  `sertifikat` int(255) NOT NULL,
+  `usia` int(255) NOT NULL,
+  `penampilan` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `calon_penerima`
+-- Dumping data for table `calon_pegawai_konversi`
 --
 
-INSERT INTO `calon_penerima` (`id`, `nama`, `batch`, `wawancara`, `pendidikan`, `pengalaman`, `karakter`, `gaji`) VALUES
-(1, 'Syaeful amri', 1, 'sangat baik', 's1', 'berpengalaman', 'kurang aktif', 6000000),
-(2, 'Yudi Herdiana', 1, 'baik', 's1', 'sangat berpengalaman', 'sangat aktif', 7000000),
-(5, 'Indigo Nugra', 1, 'sangat baik', 'sd', 'sangat berpengalaman', 'sangat aktif', 7000000);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `calon_penerima_backup`
---
-
-CREATE TABLE `calon_penerima_backup` (
-  `id` int(11) NOT NULL DEFAULT 0,
-  `nis` varchar(10) CHARACTER SET latin1 NOT NULL,
-  `nama` varchar(30) CHARACTER SET latin1 NOT NULL,
-  `jurusan` varchar(20) CHARACTER SET latin1 NOT NULL,
-  `nilai_rata` float NOT NULL,
-  `penghasilan_ortu` int(30) NOT NULL,
-  `tanggungan_ortu` int(11) NOT NULL,
-  `pekerjaan_ortu` varchar(20) CHARACTER SET latin1 NOT NULL,
-  `alat_transportasi` varchar(20) CHARACTER SET latin1 NOT NULL,
-  `tahun` varchar(4) CHARACTER SET latin1 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO `calon_pegawai_konversi` (`id`, `nama`, `batch`, `wawancara`, `pendidikan`, `pengalaman`, `sertifikat`, `usia`, `penampilan`) VALUES
+(1, 'Syaeful amri', 1, 3, 5, 4, 5, 23, 3),
+(6, 'Teresia', 5, 4, 4, 4, 4, 5000000, 0),
+(7, 'test', 5, 4, 1, 4, 4, 7000000, 0),
+(8, 'amri', 6, 4, 4, 4, 4, 5000000, 0),
+(9, 'test', 6, 4, 1, 4, 4, 6000000, 0),
+(10, 'helloo', 6, 2, 5, 4, 4, 7000000, 0),
+(11, 'Yudi Herdiana', 1, 5, 5, 4, 5, 24, 4),
+(16, 'Indigo Nugra', 1, 5, 5, 5, 5, 24, 5);
 
 -- --------------------------------------------------------
 
@@ -238,32 +209,6 @@ INSERT INTO `calon_penerima_dup` (`id`, `nis`, `nama`, `jurusan`, `nilai_rata`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `calon_penerima_konversi`
---
-
-CREATE TABLE `calon_penerima_konversi` (
-  `id` int(11) NOT NULL,
-  `nama` varchar(30) NOT NULL,
-  `batch` int(4) NOT NULL,
-  `wawancara` int(255) NOT NULL,
-  `pendidikan` int(255) NOT NULL,
-  `pengalaman` int(255) NOT NULL,
-  `karakter` int(255) NOT NULL,
-  `gaji` int(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `calon_penerima_konversi`
---
-
-INSERT INTO `calon_penerima_konversi` (`id`, `nama`, `batch`, `wawancara`, `pendidikan`, `pengalaman`, `karakter`, `gaji`) VALUES
-(1, 'Syaeful amri', 1, 4, 5, 3, 3, 6000000),
-(2, 'Yudi Herdiana', 1, 3, 5, 4, 4, 7000000),
-(5, 'Indigo Nugra', 1, 4, 1, 4, 4, 7000000);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `hasil_bobot_ahp`
 --
 
@@ -278,34 +223,12 @@ CREATE TABLE `hasil_bobot_ahp` (
 --
 
 INSERT INTO `hasil_bobot_ahp` (`id`, `kode`, `bobot`) VALUES
-(1, 'c1', 0.34),
-(2, 'c2', 0.32),
-(3, 'c3', 0.16),
-(4, 'c4', 0.11),
-(5, 'c5', 0.07);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `hasil_bobot_ahp_copy`
---
-
-CREATE TABLE `hasil_bobot_ahp_copy` (
-  `id` int(11) NOT NULL,
-  `kode` varchar(3) NOT NULL,
-  `bobot` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `hasil_bobot_ahp_copy`
---
-
-INSERT INTO `hasil_bobot_ahp_copy` (`id`, `kode`, `bobot`) VALUES
-(1, 'c1', 0.36),
-(2, 'c2', 0.3),
-(3, 'c3', 0.16),
-(4, 'c4', 0.12),
-(5, 'c5', 0.06);
+(1, 'c1', 0.37),
+(2, 'c2', 0.26),
+(3, 'c3', 0.14),
+(4, 'c4', 0.1),
+(5, 'c5', 0.08),
+(6, 'c6', 0.05);
 
 -- --------------------------------------------------------
 
@@ -321,19 +244,21 @@ CREATE TABLE `hasil_iterasi_1` (
   `c3` double NOT NULL,
   `c4` double NOT NULL,
   `c5` double NOT NULL,
-  `hasil` double DEFAULT NULL
+  `hasil` double DEFAULT NULL,
+  `c6` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `hasil_iterasi_1`
 --
 
-INSERT INTO `hasil_iterasi_1` (`id`, `kriteria`, `c1`, `c2`, `c3`, `c4`, `c5`, `hasil`) VALUES
-(1, 'c1', 5, 6.1666666666667, 16.166666666667, 20, 26, 73.333333333333),
-(2, 'c2', 5.1666666666666, 5, 12.5, 20.333333333333, 26.5, 69.5),
-(3, 'c3', 2.9583333333333, 2.6666666666667, 5, 8.0833333333333, 15, 33.708333333333),
-(4, 'c4', 2.2777777777778, 2.5, 5, 5, 9.5, 24.277777777778),
-(5, 'c5', 1.125, 1.4027777777778, 3.1111111111111, 3.5833333333333, 5, 14.222222222222);
+INSERT INTO `hasil_iterasi_1` (`id`, `kriteria`, `c1`, `c2`, `c3`, `c4`, `c5`, `hasil`, `c6`) VALUES
+(1, 'c1', 5.75, 12.333333333333, 25.833333333333, 31.5, 40.75, 163.16666666667, 47),
+(2, 'c2', 4.6666666666666, 6.5, 12.75, 21.833333333333, 26.5, 113, 40.75),
+(3, 'c3', 2.8958333333333, 4.8333333333333, 6, 10.25, 15.75, 61.479166666667, 21.75),
+(4, 'c4', 2.1944444444444, 3.5, 4.9166666666666, 6, 9.25, 44.611111111111, 18.75),
+(5, 'c5', 1.9791666666667, 4.0694444444444, 4.4444444444444, 6.25, 6, 34.659722222222, 11.916666666667),
+(6, 'c6', 0.94444444444444, 2.3125, 3.7083333333333, 4.5833333333333, 5.4166666666667, 23.215277777778, 6.25);
 
 -- --------------------------------------------------------
 
@@ -349,17 +274,24 @@ CREATE TABLE `hasil_normalisasi` (
   `pendidikan` float NOT NULL,
   `pengalaman` float NOT NULL,
   `karakter` float NOT NULL,
-  `gaji` float NOT NULL
+  `usia` float(12,0) NOT NULL,
+  `penampilan` float NOT NULL,
+  `sertifikat` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `hasil_normalisasi`
 --
 
-INSERT INTO `hasil_normalisasi` (`id`, `nama`, `batch`, `wawancara`, `pendidikan`, `pengalaman`, `karakter`, `gaji`) VALUES
-(1, 'Syaeful amri', 1, 1, 1, 0.75, 0.75, 1),
-(2, 'Yudi Herdiana', 1, 0.75, 1, 1, 1, 0.857143),
-(5, 'Indigo Nugra', 1, 1, 0.2, 1, 1, 0.857143);
+INSERT INTO `hasil_normalisasi` (`id`, `nama`, `batch`, `wawancara`, `pendidikan`, `pengalaman`, `karakter`, `usia`, `penampilan`, `sertifikat`) VALUES
+(1, 'Syaeful amri', 1, 0.6, 1, 0.8, 0, 1, 1, 1),
+(6, 'Teresia', 5, 1, 1, 1, 1, 1, 0, 0),
+(7, 'test', 5, 1, 0.25, 1, 1, 1, 0, 0),
+(8, 'amri', 6, 1, 0.8, 1, 1, 1, 0, 0),
+(9, 'test', 6, 1, 0.2, 1, 1, 1, 0, 0),
+(10, 'helloo', 6, 0.5, 1, 1, 1, 1, 0, 0),
+(11, 'Yudi Herdiana', 1, 1, 1, 0.8, 0, 1, 0.75, 1),
+(16, 'Indigo Nugra', 1, 1, 1, 1, 0, 1, 0.6, 1);
 
 -- --------------------------------------------------------
 
@@ -376,18 +308,24 @@ CREATE TABLE `hasil_perangkingan` (
   `wawancara` float NOT NULL,
   `pendidikan` float NOT NULL,
   `pengalaman` float NOT NULL,
-  `karakter` float NOT NULL,
-  `gaji` float NOT NULL
+  `sertifikat` float NOT NULL,
+  `usia` float(12,0) NOT NULL,
+  `penampilan` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `hasil_perangkingan`
 --
 
-INSERT INTO `hasil_perangkingan` (`id`, `nama`, `hasil`, `rangking`, `batch`, `wawancara`, `pendidikan`, `pengalaman`, `karakter`, `gaji`) VALUES
-(1, 'Syaeful amri', 0.933, 1, 1, 1, 1, 0.75, 0.75, 1),
-(2, 'Yudi Herdiana', 0.905, 2, 1, 0.75, 1, 1, 1, 0.857143),
-(5, 'Indigo Nugra', 0.734, 3, 1, 1, 0.2, 1, 1, 0.857143);
+INSERT INTO `hasil_perangkingan` (`id`, `nama`, `hasil`, `rangking`, `batch`, `wawancara`, `pendidikan`, `pengalaman`, `sertifikat`, `usia`, `penampilan`) VALUES
+(1, 'Syaeful amri', 0.916, 3, 1, 0.6, 1, 0.8, 1, 1, 1),
+(6, 'Teresia', 1, 1, 5, 1, 1, 1, 1, 1, 0),
+(7, 'test', 0.74, 2, 5, 1, 0.25, 1, 1, 1, 0),
+(8, 'amri', 0.946, 1, 6, 1, 0.8, 1, 1, 1, 0),
+(9, 'test', 0.774, 2, 6, 1, 0.2, 1, 1, 1, 0),
+(10, 'helloo', 0.763, 3, 6, 0.5, 1, 1, 1, 1, 0),
+(11, 'Yudi Herdiana', 0.936, 2, 1, 1, 1, 0.8, 1, 1, 0.75),
+(16, 'Indigo Nugra', 0.98, 1, 1, 1, 1, 1, 1, 1, 0.6);
 
 -- --------------------------------------------------------
 
@@ -408,11 +346,12 @@ CREATE TABLE `kriteria` (
 --
 
 INSERT INTO `kriteria` (`id`, `kode`, `nama`, `jenis`, `batch`) VALUES
-(1, 'c1', 'Wawancara', 'benefit', 0),
-(2, 'c2', 'Pendidikan', 'benefit', 0),
-(3, 'c3', 'Pengalaman', 'benefit', 0),
-(4, 'c4', 'Karakter', 'benefit', 0),
-(5, 'c5', 'Gaji', 'cost', 0);
+(1, 'c1', 'Usia', 'cost', 0),
+(2, 'c2', 'Pengalaman Kerja', 'benefit', 0),
+(3, 'c3', 'Pendidikan Terakhir', 'benefit', 0),
+(4, 'c4', 'Sertifikat Keahlian', 'benefit', 0),
+(5, 'c5', 'Wawancara', 'benefit', 0),
+(6, 'c6', 'Penampilan', 'benefit', 0);
 
 -- --------------------------------------------------------
 
@@ -485,15 +424,20 @@ CREATE TABLE `nilaikriteria` (
   `c2_3` int(255) DEFAULT NULL,
   `c3_1` int(255) DEFAULT NULL,
   `c3_2` int(255) DEFAULT NULL,
-  `c4_1` int(11) DEFAULT NULL
+  `c4_1` int(11) DEFAULT NULL,
+  `c1_5` int(255) NOT NULL,
+  `c2_4` int(255) NOT NULL,
+  `c3_3` int(255) NOT NULL,
+  `c4_2` int(255) NOT NULL,
+  `c5_1` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `nilaikriteria`
 --
 
-INSERT INTO `nilaikriteria` (`id`, `c1_1`, `c1_2`, `c1_3`, `c1_4`, `c2_1`, `c2_2`, `c2_3`, `c3_1`, `c3_2`, `c4_1`) VALUES
-(1, 2, 3, 2, 3, 4, 3, 4, 3, 2, 3);
+INSERT INTO `nilaikriteria` (`id`, `c1_1`, `c1_2`, `c1_3`, `c1_4`, `c2_1`, `c2_2`, `c2_3`, `c3_1`, `c3_2`, `c4_1`, `c1_5`, `c2_4`, `c3_3`, `c4_2`, `c5_1`) VALUES
+(1, 4, 3, 4, 3, 4, 3, 4, 3, 2, 3, 3, 3, 3, 2, 4);
 
 -- --------------------------------------------------------
 
@@ -508,19 +452,21 @@ CREATE TABLE `perbandingan_kriteria` (
   `c2` double NOT NULL,
   `c3` double NOT NULL,
   `c4` double NOT NULL,
-  `c5` double NOT NULL
+  `c5` double NOT NULL,
+  `c6` double(22,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `perbandingan_kriteria`
 --
 
-INSERT INTO `perbandingan_kriteria` (`id`, `kriteria`, `c1`, `c2`, `c3`, `c4`, `c5`) VALUES
-(1, 'c1', 1, 2, 3, 2, 3),
-(2, 'c2', 0.5, 1, 4, 3, 4),
-(3, 'c3', 0.33333333333333, 0.25, 1, 3, 2),
-(4, 'c4', 0.5, 0.33333333333333, 0.33333333333333, 1, 3),
-(5, 'c5', 0.33333333333333, 0.25, 0.5, 0.33333333333333, 1);
+INSERT INTO `perbandingan_kriteria` (`id`, `kriteria`, `c1`, `c2`, `c3`, `c4`, `c5`, `c6`) VALUES
+(1, 'c1', 1, 4, 3, 4, 3, 3.00),
+(2, 'c2', 0.25, 1, 4, 3, 4, 3.00),
+(3, 'c3', 0.33333333333333, 0.25, 1, 3, 2, 3.00),
+(4, 'c4', 0.25, 0.33333333333333, 0.33333333333333, 1, 3, 2.00),
+(5, 'c5', 0.33333333333333, 0.25, 0.5, 0.33333333333333, 1, 4.00),
+(6, 'c6', 0.25, 0.5, 0.33333333333333, 0.5, 0.25, 1.00);
 
 --
 -- Indexes for dumped tables
@@ -539,9 +485,9 @@ ALTER TABLE `calon_pegawai`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `calon_penerima`
+-- Indexes for table `calon_pegawai_konversi`
 --
-ALTER TABLE `calon_penerima`
+ALTER TABLE `calon_pegawai_konversi`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -551,21 +497,9 @@ ALTER TABLE `calon_penerima_dup`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `calon_penerima_konversi`
---
-ALTER TABLE `calon_penerima_konversi`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `hasil_bobot_ahp`
 --
 ALTER TABLE `hasil_bobot_ahp`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `hasil_bobot_ahp_copy`
---
-ALTER TABLE `hasil_bobot_ahp_copy`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -625,19 +559,19 @@ ALTER TABLE `perbandingan_kriteria`
 -- AUTO_INCREMENT for table `batch`
 --
 ALTER TABLE `batch`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `calon_pegawai`
 --
 ALTER TABLE `calon_pegawai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT for table `calon_penerima`
+-- AUTO_INCREMENT for table `calon_pegawai_konversi`
 --
-ALTER TABLE `calon_penerima`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE `calon_pegawai_konversi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1992;
 
 --
 -- AUTO_INCREMENT for table `calon_penerima_dup`
@@ -646,28 +580,16 @@ ALTER TABLE `calon_penerima_dup`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
--- AUTO_INCREMENT for table `calon_penerima_konversi`
---
-ALTER TABLE `calon_penerima_konversi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1992;
-
---
 -- AUTO_INCREMENT for table `hasil_bobot_ahp`
 --
 ALTER TABLE `hasil_bobot_ahp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `hasil_bobot_ahp_copy`
---
-ALTER TABLE `hasil_bobot_ahp_copy`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `hasil_iterasi_1`
 --
 ALTER TABLE `hasil_iterasi_1`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `hasil_normalisasi`
@@ -685,7 +607,7 @@ ALTER TABLE `hasil_perangkingan`
 -- AUTO_INCREMENT for table `kriteria`
 --
 ALTER TABLE `kriteria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `login`
@@ -709,7 +631,7 @@ ALTER TABLE `nilaikriteria`
 -- AUTO_INCREMENT for table `perbandingan_kriteria`
 --
 ALTER TABLE `perbandingan_kriteria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

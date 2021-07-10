@@ -21,6 +21,7 @@
                                     <th>C3</th> 
                                     <th>C4</th>
                                     <th>C5</th> 
+                                    <th>C6</th> 
                                 </tr> 
                             </thead> 
                             <tbody> 
@@ -42,6 +43,7 @@
                                             <td><?php echo number_format($row->c3,2) ?></td> 
                                             <td><?php echo number_format($row->c4,2) ?></td>
                                             <td><?php echo number_format($row->c5,2) ?></td>
+                                            <td><?php echo number_format($row->c6,2) ?></td>
                                         </tr> 
                                         <?php
                                     }

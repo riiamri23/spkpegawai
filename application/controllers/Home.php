@@ -14,11 +14,6 @@ class Home extends CI_Controller {
 
 	}
 
-    // public function index() {
-    //     $data['title'] = 'SPK Penerimaan Pegawai';
-    //     $this->load->view('home', $data);
-    // }
-
     public function index(){
         $data['title'] = "SPK Penerimaan Pegawai";
         $this->load->view('app.php', $data);

@@ -38,6 +38,17 @@
             </ul>
         </li>
         <li>
+            <a href="#kriteria" data-toggle="collapse" aria-expanded="false">
+                <span class="link-title">Kriteria</span>
+                <i class="mdi mdi-file-document link-icon"></i>
+            </a>
+            <ul class="collapse navigation-submenu" id="kriteria">
+                <li>
+                    <a href="<?=base_url()?>skripsikriteria" >Kriteria</a>
+                </li>
+            </ul>
+        </li>
+        <li>
         
         <a href="<?=base_url()?>batch">
             <span class="link-title">Data Calon Pegawai</span>
@@ -65,9 +76,9 @@
             <a href="<?=base_url()?>hasilperangkingan"><span class="link-title">Hasil Perangkingan</span><i class="mdi mdi-file-document link-icon"></i></a>
         </li>
         
-        <li>
+        <!-- <li>
             <a href="<?=base_url()?>laporan"><span class="link-title">Laporan</span><i class="mdi mdi-file-document link-icon"></i></a>
-        </li>
+        </li> -->
         <li class="nav-category-divider">info</li>
         <li>
             <a href="<?=base_url()?>user">

@@ -5,6 +5,7 @@ if (!defined('BASEPATH'))
 
 class Hasilperangkingan extends CI_Controller {
      var $tabel = 'hasil_perangkingan'; //variabel tabel 
+     var $tabelBatch = 'batch';
 
     public function __construct() {
         parent::__construct();
@@ -18,9 +19,14 @@ class Hasilperangkingan extends CI_Controller {
 
     // awal tampil index
     public function index() {
+        $batch = $this->input->get('batch');
+        if($batch == null){
+            $batch = 1;
+        }
         $data['title'] = 'Data Hasil Perangkingan';
-        $data['data'] = $this->model->getdatarangkingawal();
-        $data['datahasil']= $this->model->gethasilperangkingan();
+        $data['data'] = $this->model->getdatarangkingawal($batch);
+        // $data['datahasil']= $this->model->gethasilperangkingan($batch);
+        $data['batches'] = $this->model->get_all($this->tabelBatch);
         // $this->load->view('vhasilperangkingan', $data);
         // var_dump($data['data']);
         $data['page'] = 'contents/hasilperangkingan/index';

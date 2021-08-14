@@ -22,14 +22,21 @@
                                 <thead> 
                                     <tr> 
                                         <th>No</th> 
-                                        <th>Batch</th>
-                                        <th>Nama</th> 
-                                        <th>Usia</th>
-                                        <th>Pengalaman Kerja</th>
-                                        <th>Pendidikan Terakhir</th>
-                                        <th>Sertifikat Keahlian</th>
-                                        <th>Wawancara</th>
-                                        <th>Penampilan</th>
+                                        <?php
+                                            if(!empty($data)){
+
+                                                foreach(get_object_vars($data[0]) as $key => $val) {
+                                                    // do your stuff
+                                                    if($key !== 'id' && $key !== 'id_batch'){
+
+                                        ?>
+                                            <th><?=$key?></th>
+
+                                        <?php
+                                                    }
+                                                }
+                                            }
+                                        ?>
                                         <th>Aksi</th> 
                                     </tr> 
                                 </thead> 
@@ -46,14 +53,16 @@
                                             ?> 
                                             <tr> 
                                                 <td><?php echo $no ?></td>
-                                                <td><?=$row->batch?></td>
-                                                <td><?php echo $row->nama ?></td> 
-                                                <td><?=$row->usia?></td>
-                                                <td><?=$row->pengalaman?></td>
-                                                <td><?=$row->pendidikan?></td>
-                                                <td><?=$row->sertifikat?></td>
-                                                <td><?=$row->wawancara?></td>
-                                                <td><?=$row->penampilan?></td>
+                                                <?php 
+                                                    foreach($row as $key => $val){
+                                                        if($key !== 'id' && $key !== 'id_batch'){
+                                                ?>
+                                                <td><?=$val?></td>
+
+                                                <?php
+                                                        }
+                                                    }
+                                                ?>
                                                 <td><a href="<?php echo base_url() ?>calonpegawai/form/edit/<?php echo $row->id ?>?batch=<?=$batch?>" class="btn btn-info btn-sm"><i class="mdi mdi-pencil"></i></a> 
                                                 <a href="<?php echo base_url() ?>calonpegawai/hapus/<?php echo $row->id ?>?batch=<?=$batch?>" class="btn btn-danger btn-sm" onclick="return confirm('Anda Yakin menghapus data ini?')"><i class="mdi mdi-delete"></i></a>
                                                 

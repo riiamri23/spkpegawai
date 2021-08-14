@@ -29,19 +29,24 @@
                                 <input type="submit" class="btn btn-sm btn-primary" value="Submit"> 
 
                         </form>
-                        <table class="table table-striped myTable"> 
+                        <table class="table table-striped myTable table-responsive"> 
                             <thead> 
                                 <tr> 
-                                    <th>Ranking</th> 
-                                    <th>Batch</th>
-                                    <th>Nama</th> 
-                                    <th>Usia</th>
-                                    <th>Pengalaman</th>
-                                    <th>Pendidikan</th>
-                                    <th>Sertifikat</th>
-                                    <th>Wawancara</th>
-                                    <th>Penampilan</th>
-                                    <th>Hasil</th>
+                                    <?php
+                                        if(!empty($data)){
+
+                                            foreach(get_object_vars($data[0]) as $key => $val) {
+                                                // do your stuff
+                                                if($key !== 'id' && $key !== 'id_batch'){
+
+                                    ?>
+                                        <th><?=$key?></th>
+
+                                    <?php
+                                                }
+                                            }
+                                        }
+                                    ?>
                                 </tr> 
                             </thead> 
                             <tbody> 
@@ -56,16 +61,16 @@
                                         // $no++;
                                         ?> 
                                         <tr> 
-                                            <td><?=$row->rangking ?></td>
-                                            <td><?=$row->batch?></td>
-                                            <td><?php echo $row->nama ?></td> 
-                                            <td><?=$row->usia?></td>
-                                            <td><?=$row->pengalaman?></td>
-                                            <td><?=$row->pendidikan?></td>  
-                                            <td><?=$row->sertifikat?></td>
-                                            <td><?=$row->wawancara?></td> 
-                                            <td><?=$row->penampilan?></td>
-                                            <td><?=$row->hasil ?></td>
+                                            <?php 
+                                                foreach($row as $key => $val){
+                                                    if($key !== 'id' && $key !== 'id_batch'){
+                                            ?>
+                                            <td><?=$val?></td>
+
+                                            <?php
+                                                    }
+                                                }
+                                            ?>
                                         </tr> 
                                         <?php
                                     }

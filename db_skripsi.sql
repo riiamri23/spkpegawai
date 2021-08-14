@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 24, 2021 at 10:34 AM
+-- Generation Time: Aug 13, 2021 at 03:41 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.6
 
@@ -20,338 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_skripsi`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `batch`
---
-
-CREATE TABLE `batch` (
-  `id` int(11) NOT NULL,
-  `batch` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `calon_pegawai`
---
-
-CREATE TABLE `calon_pegawai` (
-  `id` int(11) NOT NULL,
-  `nama` varchar(30) NOT NULL,
-  `batch` int(4) NOT NULL,
-  `wawancara` enum('Sangat Buruk','Buruk','Cukup','Baik','Sangat Baik') NOT NULL,
-  `pendidikan` enum('SMA/SMK','D3','S1') NOT NULL,
-  `pengalaman` enum('Belum ada/Freshgraduate','1 - < 2 Tahun','> 2 Tahun') NOT NULL,
-  `usia` int(255) NOT NULL,
-  `sertifikat` enum('Tidak Ada','Ada') NOT NULL,
-  `penampilan` enum('Sangat Buruk','Buruk','Cukup','Baik','Sangat Baik') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `calon_pegawai_konversi`
---
-
-CREATE TABLE `calon_pegawai_konversi` (
-  `id` int(11) NOT NULL,
-  `nama` varchar(30) NOT NULL,
-  `batch` int(4) NOT NULL,
-  `wawancara` int(255) NOT NULL,
-  `pendidikan` int(255) NOT NULL,
-  `pengalaman` int(255) NOT NULL,
-  `sertifikat` int(255) NOT NULL,
-  `usia` int(255) NOT NULL,
-  `penampilan` int(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `calon_pegawai_konversi`
---
-
-INSERT INTO `calon_pegawai_konversi` (`id`, `nama`, `batch`, `wawancara`, `pendidikan`, `pengalaman`, `sertifikat`, `usia`, `penampilan`) VALUES
-(1, 'Syaeful amri', 1, 3, 5, 4, 5, 23, 3),
-(6, 'Teresia', 5, 4, 4, 4, 4, 5000000, 0),
-(7, 'test', 5, 4, 1, 4, 4, 7000000, 0),
-(8, 'amri', 6, 4, 4, 4, 4, 5000000, 0),
-(9, 'test', 6, 4, 1, 4, 4, 6000000, 0),
-(10, 'helloo', 6, 2, 5, 4, 4, 7000000, 0),
-(11, 'Yudi Herdiana', 1, 5, 5, 4, 5, 24, 4),
-(16, 'Indigo Nugra', 1, 5, 5, 5, 5, 24, 5);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `calon_penerima_dup`
---
-
-CREATE TABLE `calon_penerima_dup` (
-  `id` int(11) NOT NULL,
-  `nis` varchar(10) NOT NULL,
-  `nama` varchar(30) NOT NULL,
-  `jurusan` varchar(20) NOT NULL,
-  `nilai_rata` float NOT NULL,
-  `penghasilan_ortu` varchar(30) NOT NULL,
-  `tanggungan_ortu` int(11) NOT NULL,
-  `pekerjaan_ortu` varchar(20) NOT NULL,
-  `alat_transportasi` varchar(20) NOT NULL,
-  `tahun` varchar(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `calon_penerima_dup`
---
-
-INSERT INTO `calon_penerima_dup` (`id`, `nis`, `nama`, `jurusan`, `nilai_rata`, `penghasilan_ortu`, `tanggungan_ortu`, `pekerjaan_ortu`, `alat_transportasi`, `tahun`) VALUES
-(1, '0032548735', 'A. Iwan Setiawan', 'TKJ', 78.8, 'Kurang dari Rp. 500,000', 1, 'Petani', 'Jalan kaki', '2019'),
-(2, '0034010116', 'A. Mansuruddin Faqih', 'TKJ', 76.33, 'Rp. 500,000 - Rp. 999,999', 3, 'Petani', 'Sepeda motor', '2019'),
-(3, '0003306710', 'Aan', 'TKJ', 47.4, 'Rp. 500,000 - Rp. 999,999', 1, 'Petani', 'Sepeda motor', '2019'),
-(4, '0025697409', 'Aan Hidayat', 'TKJ', 78.2, 'Rp. 1,000,000 - Rp. 1,999,999', 3, 'Petani', 'Angkutan umum', '2019'),
-(5, '0027270512', 'Aan Triana', 'TKJ', 79.27, 'Kurang dari Rp. 500,000', 2, 'Petani', 'Jalan kaki', '2019'),
-(6, '0027325379', 'Aang Epiriyana', 'TKJ', 80.27, 'Rp. 500,000 - Rp. 999,999', 1, 'Petani', 'Jalan kaki', '2019'),
-(7, '0009703216', 'Aang Kornaefi', 'TKJ', 81.33, 'Rp. 500,000 - Rp. 999,999', 4, 'Petani', 'Jalan kaki', '2019'),
-(8, '0036869435', 'Aap Adita', 'TKJ', 79.2, 'Rp. 500,000 - Rp. 999,999', 2, 'Petani', 'Jalan kaki', '2019'),
-(9, '0007815091', 'Aap Apandi', 'TKJ', 79.07, 'Rp. 1,000,000 - Rp. 1,999,999', 2, 'Wiraswasta', 'Sepeda motor', '2019'),
-(10, '0023431499', 'Aas Asiah', 'TKJ', 77.07, 'Rp. 1,000,000 - Rp. 1,999,999', 1, 'Wiraswasta', 'Jalan kaki', '2019'),
-(11, '0004421347', 'Aas Komalasari', 'TKJ', 79.53, 'Rp. 500,000 - Rp. 999,999', 1, 'Wiraswasta', 'Sepeda motor', '2019'),
-(12, '0013110042', 'Aat Atmayudin', 'TKJ', 78.13, 'Rp. 500,000 - Rp. 999,999', 2, 'Wiraswasta', 'Angkutan umum', '2019'),
-(13, '0003621564', 'Aat Supriatna', 'TKJ', 46.53, 'Rp. 1,000,000 - Rp. 1,999,999', 2, 'Wiraswasta', 'Angkutan umum', '2019'),
-(14, '0003205296', 'Abdul Manan', 'TKJ', 80.4, 'Rp. 1,000,000 - Rp. 1,999,999', 3, 'Wiraswasta', 'Angkutan umum', '2019'),
-(15, '0011541157', 'Abdul Rohman', 'TKJ', 79.67, 'Rp. 1,000,000 - Rp. 1,999,999', 2, 'Petani', 'Sepeda motor', '2019'),
-(16, '0003691536', 'Abidin Kholik', 'TKJ', 77.8, 'Rp. 1,000,000 - Rp. 1,999,999', 3, 'Lainnya', 'Angkutan umum', '2019'),
-(17, '0005607727', 'Achmad Puadnudin', 'TKJ', 74, 'Rp. 500,000 - Rp. 999,999', 4, 'Petani', 'Sepeda motor', '2019'),
-(18, '0029086309', 'Acih Mintarsih', 'TKJ', 79.47, 'Rp. 1,000,000 - Rp. 1,999,999', 2, 'Petani', 'Sepeda motor', '2019'),
-(19, '0020263889', 'Aden Hermawan', 'TKJ', 81.87, 'Rp. 500,000 - Rp. 999,999', 2, 'Petani', 'Angkutan umum', '2019'),
-(20, '9991530291', 'Adi Herdiansyah', 'TKJ', 79.4, 'Rp. 1,000,000 - Rp. 1,999,999', 2, 'Petani', 'Sepeda motor', '2019'),
-(21, '0016765562', 'Adi Rahmat Fauzi', 'TKJ', 57.07, 'Rp. 2,000,000 - Rp. 4,999,999', 1, 'Wiraswasta', 'Sepeda motor', '2019'),
-(22, '0032127042', 'Adih Gunawan', 'TKJ', 72.93, 'Rp. 500,000 - Rp. 999,999', 1, 'Petani', 'Sepeda motor', '2019'),
-(23, '0011585952', 'Adimi', 'TKJ', 82.87, 'Rp. 1,000,000 - Rp. 1,999,999', 1, 'Petani', 'Sepeda motor', '2019'),
-(24, '0164184807', 'Adin', 'TKJ', 77.87, 'Rp. 1,000,000 - Rp. 1,999,999', 2, 'Petani', 'Sepeda motor', '2019'),
-(25, '0011541207', 'Aditia', 'TKJ', 81, 'Kurang dari Rp. 500,000', 2, 'Wiraswasta', 'Angkutan umum', '2019'),
-(26, '0011586440', 'Adni', 'TKJ', 79.13, 'Rp. 500,000 - Rp. 999,999', 4, 'Petani', 'Sepeda motor', '2019'),
-(27, '0015403257', 'Adra', 'TKJ', 81, 'Rp. 1,000,000 - Rp. 1,999,999', 2, 'Wiraswasta', 'Jalan kaki', '2019'),
-(28, '0027261370', 'Aem. Mutaqien', 'TKJ', 78.73, 'Rp. 1,000,000 - Rp. 1,999,999', 1, 'Wiraswasta', 'Sepeda motor', '2019'),
-(29, '9995742293', 'Aep', 'TKJ', 78.8, 'Rp. 500,000 - Rp. 999,999', 4, 'Petani', 'Sepeda motor', '2019'),
-(30, '0026769781', 'Agnes Meilani', 'TKJ', 81, 'Rp. 1,000,000 - Rp. 1,999,999', 1, 'Pedagang Besar', 'Sepeda motor', '2019'),
-(31, '0017086338', 'Agus', 'TKJ', 79.87, 'Rp. 1,000,000 - Rp. 1,999,999', 2, 'Petani', 'Jalan kaki', '2019'),
-(32, '0022877777', 'Agus Mustopa', 'TKJ', 80.93, 'Rp. 1,000,000 - Rp. 1,999,999', 2, 'Petani', 'Angkutan umum', '2019'),
-(33, '9993054365', 'Agus Priatna', 'TKJ', 80.93, 'Rp. 1,000,000 - Rp. 1,999,999', 2, 'Wiraswasta', 'Sepeda motor', '2019'),
-(34, '0033058074', 'Ahdi', 'TKJ', 78.73, 'Rp. 500,000 - Rp. 999,999', 2, 'Wiraswasta', 'Angkutan umum', '2019'),
-(35, '0026513179', 'Ahmad Ahyudin', 'TKJ', 82.93, 'Rp. 500,000 - Rp. 999,999', 1, 'Petani', 'Jalan kaki', '2019'),
-(36, '0020262855', 'Ahmad Badru Tamam', 'TKJ', 58.87, 'Rp. 2,000,000 - Rp. 4,999,999', 1, 'Wiraswasta', 'Sepeda motor', '2019'),
-(37, '0049444818', 'Ahmad Bodin', 'TKJ', 72.6, 'Rp. 500,000 - Rp. 999,999', 1, 'Petani', 'Jalan kaki', '2019'),
-(38, '0009004336', 'Ahmad Fajari', 'TKJ', 73.13, 'Rp. 500,000 - Rp. 999,999', 1, 'Petani', 'Angkutan umum', '2019'),
-(39, '0027220516', 'Ahmad Fauzian Arifin', 'TKJ', 73.4, 'Rp. 500,000 - Rp. 999,999', 1, 'Petani', 'Angkutan umum', '2019'),
-(40, '0004245171', 'Ahmad Iim', 'TKJ', 52.27, 'Rp. 500,000 - Rp. 999,999', 2, 'Petani', 'Angkutan umum', '2019'),
-(41, '0026033028', 'Ahmad Jaelani', 'TKJ', 69.4, 'Rp. 1,000,000 - Rp. 1,999,999', 2, 'Petani', 'Sepeda motor', '2019'),
-(42, '0008162965', 'Ahmad Juni', 'TKJ', 46.13, 'Rp. 1,000,000 - Rp. 1,999,999', 3, 'Petani', 'Angkutan umum', '2019'),
-(43, '0027391864', 'Ahmad Matin Ansori', 'TKJ', 74.73, 'Kurang dari Rp. 500,000', 2, 'Petani', 'Jalan kaki', '2019'),
-(44, '0012268882', 'Ahmad Saepudin', 'TKJ', 73.67, 'Rp. 1,000,000 - Rp. 1,999,999', 1, 'Wiraswasta', 'Angkutan umum', '2019'),
-(45, '0011586172', 'Ahmad Sutisna', 'TKJ', 47.07, 'Rp. 1,000,000 - Rp. 1,999,999', 4, 'Wiraswasta', 'Jalan kaki', '2019'),
-(46, '0025940551', 'Ahmad Taufik', 'TKJ', 74.4, 'Rp. 2,000,000 - Rp. 4,999,999', 1, 'Wiraswasta', 'Sepeda motor', '2019'),
-(47, '0006189246', 'Ahyani', 'TKJ', 75.8, 'Rp. 2,000,000 - Rp. 4,999,999', 1, 'Wiraswasta', 'Sepeda motor', '2019'),
-(48, '0005667744', 'Ahyudin', 'TKJ', 46.07, 'Rp. 1,000,000 - Rp. 1,999,999', 1, 'Petani', 'Sepeda motor', '2019'),
-(49, '0013950032', 'Ai Umi Hapidatul Hidayah', 'TKJ', 73.27, 'Rp. 1,000,000 - Rp. 1,999,999', 2, 'Wiraswasta', 'Jalan kaki', '2019'),
-(50, '0022389649', 'Ajat Sudrajat', 'TKJ', 75.87, 'Rp. 1,000,000 - Rp. 1,999,999', 1, 'Petani', 'Angkutan umum', '2019'),
-(51, '0018584224', 'Aji Ripansyah', 'TKJ', 74.93, 'Rp. 1,000,000 - Rp. 1,999,999', 2, 'Petani', 'Angkutan umum', '2019'),
-(52, '0029332300', 'Aji Saputra', 'TKJ', 54.93, 'Rp. 500,000 - Rp. 999,999', 2, 'Petani', 'Angkutan umum', '2019'),
-(53, '0000981609', 'Ajid', 'TKJ', 74.6, 'Rp. 1,000,000 - Rp. 1,999,999', 1, 'Petani', 'Sepeda motor', '2019'),
-(54, '9998506255', 'Ajril Aril Ilham', 'TKJ', 70.53, 'Rp. 500,000 - Rp. 999,999', 1, 'Petani', 'Sepeda motor', '2019'),
-(55, '0000981355', 'Aldi', 'TKJ', 47.53, 'Rp. 500,000 - Rp. 999,999', 2, 'Petani', 'Angkutan umum', '2019'),
-(56, '0020598008', 'Aldi Agustiara', 'TKJ', 73.4, 'Rp. 1,000,000 - Rp. 1,999,999', 2, 'Wiraswasta', 'Angkutan umum', '2019'),
-(57, '0020081916', 'Aldi Setiawan', 'TKJ', 47.07, 'Rp. 500,000 - Rp. 999,999', 0, 'Petani', 'Jalan kaki', '2019'),
-(58, '0009524682', 'Aldi Yana', 'TKJ', 66.67, 'Rp. 1,000,000 - Rp. 1,999,999', 1, 'Petani', 'Sepeda motor', '2019'),
-(59, '9995773453', 'Alexander', 'TKJ', 76.07, 'Rp. 1,000,000 - Rp. 1,999,999', 2, 'Petani', 'Sepeda motor', '2019'),
-(60, '9991512602', 'Ali', 'TKJ', 70.4, 'Rp. 500,000 - Rp. 999,999', 1, 'Petani', 'Sepeda motor', '2019'),
-(61, '0018344118', 'Ali Hariri', 'TKJ', 73.53, 'Rp. 1,000,000 - Rp. 1,999,999', 2, 'Wiraswasta', 'Angkutan umum', '2019'),
-(62, '0007388346', 'Ali Martodo', 'TKJ', 71.33, 'Rp. 500,000 - Rp. 999,999', 3, 'Petani', 'Sepeda motor', '2019'),
-(63, '0009781593', 'Aliah', 'TKJ', 75.27, 'Rp. 1,000,000 - Rp. 1,999,999', 1, 'Nelayan', 'Angkutan umum', '2019'),
-(64, '0023623700', 'Alpan Pratama', 'TKJ', 66.13, 'Rp. 500,000 - Rp. 999,999', 1, 'Nelayan', 'Angkutan umum', '2019'),
-(65, '0029808395', 'Alpin', 'TKJ', 77.33, 'Rp. 500,000 - Rp. 999,999', 1, 'Petani', 'Angkutan umum', '2019'),
-(66, '0014675163', 'Alus', 'TKJ', 71.67, 'Rp. 1,000,000 - Rp. 1,999,999', 3, 'Petani', 'Angkutan umum', '2019'),
-(67, '0033910400', 'Alwi', 'TKJ', 63.47, 'Kurang dari Rp. 500,000', 1, 'Nelayan', 'Angkutan umum', '2019'),
-(68, '0008326331', 'Amad', 'TKJ', 74.47, 'Rp. 1,000,000 - Rp. 1,999,999', 2, 'Petani', 'Sepeda motor', '2019'),
-(69, '0000981619', 'Amedi', 'TKJ', 80.67, 'Rp. 500,000 - Rp. 999,999', 1, 'Petani', 'Jalan kaki', '2019'),
-(70, '0026157837', 'Amelia Nuryani', 'TKJ', 55.13, 'Rp. 500,000 - Rp. 999,999', 1, 'Petani', 'Jalan kaki', '2019'),
-(71, '0019973489', 'Amin', 'TKJ', 72.47, 'Rp. 500,000 - Rp. 999,999', 1, 'Petani', 'Sepeda motor', '2019'),
-(72, '0014675535', 'Aminah', 'TKJ', 74.07, 'Rp. 1,000,000 - Rp. 1,999,999', 3, 'Nelayan', 'Angkutan umum', '2019'),
-(73, '0004582770', 'Amirudin', 'TKJ', 78.44, 'Rp. 1,000,000 - Rp. 1,999,999', 2, 'Petani', 'Sepeda motor', '2019'),
-(74, '9997524201', 'Amnah Amelia', 'TKJ', 84.06, 'Rp. 500,000 - Rp. 999,999', 1, 'Wiraswasta', 'Sepeda motor', '2019'),
-(75, '0009673660', 'Amsar', 'TKJ', 22.75, 'Rp. 1,000,000 - Rp. 1,999,999', 0, 'Petani', 'Jalan kaki', '2019'),
-(76, '0033998206', 'Amsir', 'TKJ', 81.88, 'Rp. 500,000 - Rp. 999,999', 1, 'Petani', 'Sepeda motor', '2019'),
-(77, '0038420452', 'Anah', 'TKJ', 79.88, 'Rp. 500,000 - Rp. 999,999', 1, 'Petani', 'Jalan kaki', '2019'),
-(78, '0008825656', 'Anan Setiawan', 'TKJ', 28.25, 'Rp. 1,000,000 - Rp. 1,999,999', 2, 'Wiraswasta', 'Sepeda motor', '2019'),
-(79, '0000992969', 'Anang Wijaya', 'TKJ', 80.31, 'Kurang dari Rp. 500,000', 1, 'Petani', 'Angkutan umum', '2019'),
-(80, '9981180017', 'Anda', 'TKJ', 59.43, 'Tidak Berpenghasilan', 2, 'Sudah Meninggal', 'Angkutan umum', '2019'),
-(81, '0027787514', 'Anda Hidayatullah', 'TSM', 64.5, 'Rp. 2,000,000 - Rp. 4,999,999', 2, 'Wiraswasta', 'Sepeda motor', '2019'),
-(82, '0009634636', 'Andi', 'TSM', 49.21, 'Rp. 1,000,000 - Rp. 1,999,999', 1, 'Wiraswasta', 'Sepeda motor', '2019'),
-(83, '0011586051', 'Andi', 'TSM', 74.29, 'Rp. 500,000 - Rp. 999,999', 1, 'Petani', 'Angkutan umum', '2019'),
-(84, '0017221131', 'Andi Anugrah', 'TSM', 69.43, 'Rp. 1,000,000 - Rp. 1,999,999', 1, 'Wiraswasta', 'Angkutan umum', '2019'),
-(85, '0029652859', 'Andi Hermawan', 'TSM', 69.36, 'Rp. 1,000,000 - Rp. 1,999,999', 1, 'Petani', 'Angkutan umum', '2019'),
-(86, '0024600609', 'Andi Purnawirawan', 'TSM', 71.64, 'Kurang dari Rp. 500,000', 2, 'Nelayan', 'Sepeda motor', '2019'),
-(87, '0029758575', 'Andini Fitri Yanti', 'TSM', 79.36, 'Rp. 500,000 - Rp. 999,999', 2, 'Petani', 'Angkutan umum', '2019'),
-(88, '0026568181', 'Andra', 'TSM', 79.5, 'Rp. 500,000 - Rp. 999,999', 2, 'Petani', 'Jalan kaki', '2019'),
-(89, '0034116266', 'Andri Irawan', 'TSM', 83.07, 'Rp. 500,000 - Rp. 999,999', 1, 'Nelayan', 'Angkutan umum', '2019'),
-(90, '9991539538', 'Andri Yani', 'TSM', 77.29, 'Rp. 500,000 - Rp. 999,999', 0, 'Petani', 'Sepeda motor', '2019'),
-(91, '0012324471', 'Andrian', 'TSM', 60.86, 'Rp. 500,000 - Rp. 999,999', 0, 'Petani', 'Sepeda motor', '2019'),
-(92, '0036289311', 'Angga', 'TSM', 45.07, 'Rp. 1,000,000 - Rp. 1,999,999', 1, 'Wiraswasta', 'Sepeda motor', '2019'),
-(93, '0031425703', 'Anggara', 'TSM', 82.64, 'Rp. 1,000,000 - Rp. 1,999,999', 0, 'Wiraswasta', 'Sepeda motor', '2019'),
-(94, '9996529887', 'Anggi Mulyadi', 'TSM', 80.14, 'Rp. 2,000,000 - Rp. 4,999,999', 1, 'Wiraswasta', 'Angkutan umum', '2019'),
-(95, '0009358789', 'Anggi Sukmajaya', 'TSM', 74.79, 'Rp. 1,000,000 - Rp. 1,999,999', 1, 'Petani', 'Angkutan umum', '2019'),
-(96, '0012623808', 'Ani Kurniawati', 'TSM', 75.21, 'Rp. 500,000 - Rp. 999,999', 2, 'Petani', 'Jalan kaki', '2019'),
-(97, '0022963737', 'Aniah', 'TSM', 58.14, 'Rp. 500,000 - Rp. 999,999', 1, 'Petani', 'Jalan kaki', '2019'),
-(98, '0037517924', 'Aning Jupriani', 'TSM', 82.79, 'Rp. 2,000,000 - Rp. 4,999,999', 2, 'Wiraswasta', 'Sepeda motor', '2019'),
-(99, '0009684510', 'Anisa Agustina', 'TSM', 60, 'Rp. 1,000,000 - Rp. 1,999,999', 1, 'Wiraswasta', 'Angkutan umum', '2019');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `hasil_bobot_ahp`
---
-
-CREATE TABLE `hasil_bobot_ahp` (
-  `id` int(11) NOT NULL,
-  `kode` varchar(3) NOT NULL,
-  `bobot` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `hasil_bobot_ahp`
---
-
-INSERT INTO `hasil_bobot_ahp` (`id`, `kode`, `bobot`) VALUES
-(1, 'c1', 0.37),
-(2, 'c2', 0.26),
-(3, 'c3', 0.14),
-(4, 'c4', 0.1),
-(5, 'c5', 0.08),
-(6, 'c6', 0.05);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `hasil_iterasi_1`
---
-
-CREATE TABLE `hasil_iterasi_1` (
-  `id` int(11) NOT NULL,
-  `kriteria` varchar(25) NOT NULL,
-  `c1` double NOT NULL,
-  `c2` double NOT NULL,
-  `c3` double NOT NULL,
-  `c4` double NOT NULL,
-  `c5` double NOT NULL,
-  `hasil` double DEFAULT NULL,
-  `c6` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `hasil_iterasi_1`
---
-
-INSERT INTO `hasil_iterasi_1` (`id`, `kriteria`, `c1`, `c2`, `c3`, `c4`, `c5`, `hasil`, `c6`) VALUES
-(1, 'c1', 5.75, 12.333333333333, 25.833333333333, 31.5, 40.75, 163.16666666667, 47),
-(2, 'c2', 4.6666666666666, 6.5, 12.75, 21.833333333333, 26.5, 113, 40.75),
-(3, 'c3', 2.8958333333333, 4.8333333333333, 6, 10.25, 15.75, 61.479166666667, 21.75),
-(4, 'c4', 2.1944444444444, 3.5, 4.9166666666666, 6, 9.25, 44.611111111111, 18.75),
-(5, 'c5', 1.9791666666667, 4.0694444444444, 4.4444444444444, 6.25, 6, 34.659722222222, 11.916666666667),
-(6, 'c6', 0.94444444444444, 2.3125, 3.7083333333333, 4.5833333333333, 5.4166666666667, 23.215277777778, 6.25);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `hasil_normalisasi`
---
-
-CREATE TABLE `hasil_normalisasi` (
-  `id` int(11) NOT NULL,
-  `nama` varchar(30) NOT NULL,
-  `batch` int(4) NOT NULL,
-  `wawancara` float NOT NULL,
-  `pendidikan` float NOT NULL,
-  `pengalaman` float NOT NULL,
-  `karakter` float NOT NULL,
-  `usia` float(12,0) NOT NULL,
-  `penampilan` float NOT NULL,
-  `sertifikat` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `hasil_normalisasi`
---
-
-INSERT INTO `hasil_normalisasi` (`id`, `nama`, `batch`, `wawancara`, `pendidikan`, `pengalaman`, `karakter`, `usia`, `penampilan`, `sertifikat`) VALUES
-(1, 'Syaeful amri', 1, 0.6, 1, 0.8, 0, 1, 1, 1),
-(6, 'Teresia', 5, 1, 1, 1, 1, 1, 0, 0),
-(7, 'test', 5, 1, 0.25, 1, 1, 1, 0, 0),
-(8, 'amri', 6, 1, 0.8, 1, 1, 1, 0, 0),
-(9, 'test', 6, 1, 0.2, 1, 1, 1, 0, 0),
-(10, 'helloo', 6, 0.5, 1, 1, 1, 1, 0, 0),
-(11, 'Yudi Herdiana', 1, 1, 1, 0.8, 0, 1, 0.75, 1),
-(16, 'Indigo Nugra', 1, 1, 1, 1, 0, 1, 0.6, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `hasil_perangkingan`
---
-
-CREATE TABLE `hasil_perangkingan` (
-  `id` int(11) NOT NULL,
-  `nama` varchar(30) NOT NULL,
-  `hasil` float DEFAULT NULL,
-  `rangking` int(11) DEFAULT NULL,
-  `batch` int(4) NOT NULL,
-  `wawancara` float NOT NULL,
-  `pendidikan` float NOT NULL,
-  `pengalaman` float NOT NULL,
-  `sertifikat` float NOT NULL,
-  `usia` float(12,0) NOT NULL,
-  `penampilan` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `hasil_perangkingan`
---
-
-INSERT INTO `hasil_perangkingan` (`id`, `nama`, `hasil`, `rangking`, `batch`, `wawancara`, `pendidikan`, `pengalaman`, `sertifikat`, `usia`, `penampilan`) VALUES
-(1, 'Syaeful amri', 0.916, 3, 1, 0.6, 1, 0.8, 1, 1, 1),
-(6, 'Teresia', 1, 1, 5, 1, 1, 1, 1, 1, 0),
-(7, 'test', 0.74, 2, 5, 1, 0.25, 1, 1, 1, 0),
-(8, 'amri', 0.946, 1, 6, 1, 0.8, 1, 1, 1, 0),
-(9, 'test', 0.774, 2, 6, 1, 0.2, 1, 1, 1, 0),
-(10, 'helloo', 0.763, 3, 6, 0.5, 1, 1, 1, 1, 0),
-(11, 'Yudi Herdiana', 0.936, 2, 1, 1, 1, 0.8, 1, 1, 0.75),
-(16, 'Indigo Nugra', 0.98, 1, 1, 1, 1, 1, 1, 1, 0.6);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `kriteria`
---
-
-CREATE TABLE `kriteria` (
-  `id` int(11) NOT NULL,
-  `kode` varchar(3) NOT NULL,
-  `nama` varchar(25) NOT NULL,
-  `jenis` varchar(10) NOT NULL,
-  `batch` int(255) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `kriteria`
---
-
-INSERT INTO `kriteria` (`id`, `kode`, `nama`, `jenis`, `batch`) VALUES
-(1, 'c1', 'Usia', 'cost', 0),
-(2, 'c2', 'Pengalaman Kerja', 'benefit', 0),
-(3, 'c3', 'Pendidikan Terakhir', 'benefit', 0),
-(4, 'c4', 'Sertifikat Keahlian', 'benefit', 0),
-(5, 'c5', 'Wawancara', 'benefit', 0),
-(6, 'c6', 'Penampilan', 'benefit', 0);
 
 -- --------------------------------------------------------
 
@@ -378,153 +46,363 @@ INSERT INTO `login` (`username`, `password`, `nama_lengkap`, `jabatan`, `status`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lookup_pegawai`
+-- Table structure for table `skripsi_batch`
 --
 
-CREATE TABLE `lookup_pegawai` (
+CREATE TABLE `skripsi_batch` (
   `id` int(11) NOT NULL,
-  `keterangan` varchar(255) DEFAULT NULL,
-  `prioritas` int(11) DEFAULT NULL,
-  `kriteria` enum('wawancara','pendidikan','pengalaman','karakter','gaji') DEFAULT NULL
+  `batch` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `lookup_pegawai`
+-- Dumping data for table `skripsi_batch`
 --
 
-INSERT INTO `lookup_pegawai` (`id`, `keterangan`, `prioritas`, `kriteria`) VALUES
-(1, 'Wawancara sangat aktif', 1, 'wawancara'),
-(2, 'Wawancara aktif', 2, 'wawancara'),
-(3, 'Wawancara passive', 3, 'wawancara'),
-(4, 'SMA', 3, 'pendidikan'),
-(5, 'D3', 2, 'pendidikan'),
-(6, 'S1', 1, 'pendidikan'),
-(7, 'Berpengalaman', 1, 'pengalaman'),
-(8, 'Kurang Berpengalaman', 2, 'pengalaman'),
-(9, 'Aktif', 1, 'karakter'),
-(10, 'Passive', 2, 'karakter'),
-(11, '4.500.000 < Gaji', 3, 'gaji'),
-(12, '4.000.000 < Gaji < 4.500.000', 2, 'gaji'),
-(13, 'Gaji < 4.000.000', 1, 'gaji');
+INSERT INTO `skripsi_batch` (`id`, `batch`) VALUES
+(9, 'IT DEVELOPER'),
+(10, 'Operator mesin'),
+(11, 'Pramuniaga indomarco');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `nilaikriteria`
+-- Table structure for table `skripsi_bobotahp`
 --
 
-CREATE TABLE `nilaikriteria` (
+CREATE TABLE `skripsi_bobotahp` (
+  `id` int(11) NOT NULL DEFAULT 0,
+  `kode` varchar(3) CHARACTER SET latin1 NOT NULL,
+  `bobot` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `skripsi_bobotahp`
+--
+
+INSERT INTO `skripsi_bobotahp` (`id`, `kode`, `bobot`) VALUES
+(0, 'c1', 0.05),
+(0, 'c2', 0.27),
+(0, 'c3', 0.1),
+(0, 'c4', 0.41),
+(0, 'c5', 0.13),
+(0, 'c6', 0.04);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `skripsi_calon_pegawai`
+--
+
+CREATE TABLE `skripsi_calon_pegawai` (
   `id` int(11) NOT NULL,
-  `c1_1` int(255) DEFAULT NULL,
-  `c1_2` int(255) DEFAULT NULL,
-  `c1_3` int(255) DEFAULT NULL,
-  `c1_4` int(255) DEFAULT NULL,
-  `c2_1` int(255) DEFAULT NULL,
-  `c2_2` int(255) DEFAULT NULL,
-  `c2_3` int(255) DEFAULT NULL,
-  `c3_1` int(255) DEFAULT NULL,
-  `c3_2` int(255) DEFAULT NULL,
-  `c4_1` int(11) DEFAULT NULL,
-  `c1_5` int(255) NOT NULL,
-  `c2_4` int(255) NOT NULL,
-  `c3_3` int(255) NOT NULL,
-  `c4_2` int(255) NOT NULL,
-  `c5_1` int(255) NOT NULL
+  `nama` varchar(30) NOT NULL,
+  `batch` int(4) NOT NULL,
+  `C1` decimal(10,2) DEFAULT NULL,
+  `C2` decimal(10,2) DEFAULT NULL,
+  `C3` decimal(10,2) DEFAULT NULL,
+  `C4` decimal(10,2) DEFAULT NULL,
+  `C5` decimal(10,2) DEFAULT NULL,
+  `C6` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `nilaikriteria`
+-- Dumping data for table `skripsi_calon_pegawai`
 --
 
-INSERT INTO `nilaikriteria` (`id`, `c1_1`, `c1_2`, `c1_3`, `c1_4`, `c2_1`, `c2_2`, `c2_3`, `c3_1`, `c3_2`, `c4_1`, `c1_5`, `c2_4`, `c3_3`, `c4_2`, `c5_1`) VALUES
-(1, 4, 3, 4, 3, 4, 3, 4, 3, 2, 3, 3, 3, 3, 2, 4);
+INSERT INTO `skripsi_calon_pegawai` (`id`, `nama`, `batch`, `C1`, `C2`, `C3`, `C4`, `C5`, `C6`) VALUES
+(26, 'Calon 1', 9, '0.75', '1.00', '1.00', '1.00', '0.75', '0.50'),
+(27, 'Calon 2', 9, '1.00', '0.75', '0.75', '0.25', '1.00', '0.75'),
+(28, 'Calon 3', 9, '1.00', '0.25', '0.50', '0.25', '0.50', '1.00'),
+(29, 'Calon 4', 9, '1.00', '0.25', '0.25', '1.00', '0.50', '0.75'),
+(30, 'Calon 5', 9, '1.00', '0.75', '1.00', '1.00', '0.75', '0.50'),
+(31, 'Jessy', 10, '0.50', '0.75', '0.50', '0.25', '0.75', '0.75'),
+(32, 'Indigo Nugra', 10, '0.50', '0.75', '0.75', '1.00', '1.00', '1.00'),
+(33, 'Teresia', 10, '0.75', '0.50', '0.75', '1.00', '0.75', '0.75'),
+(34, 'syaeful amri', 10, '1.00', '1.00', '1.00', '1.00', '1.00', '1.00'),
+(35, 'Indigo Nugra', 11, '1.00', '0.75', '0.75', '1.00', '1.00', '1.00');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `perbandingan_kriteria`
+-- Table structure for table `skripsi_cpegawai_kriteria`
 --
 
-CREATE TABLE `perbandingan_kriteria` (
+CREATE TABLE `skripsi_cpegawai_kriteria` (
   `id` int(11) NOT NULL,
-  `kriteria` varchar(25) NOT NULL,
+  `id_cpegawai` int(11) DEFAULT NULL,
+  `id_kriteria` int(11) DEFAULT NULL,
+  `id_subkriteria` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `skripsi_hasiliterasi`
+--
+
+CREATE TABLE `skripsi_hasiliterasi` (
+  `id` int(11) NOT NULL DEFAULT 0,
+  `kriteria` varchar(25) CHARACTER SET latin1 NOT NULL,
   `c1` double NOT NULL,
   `c2` double NOT NULL,
   `c3` double NOT NULL,
   `c4` double NOT NULL,
   `c5` double NOT NULL,
-  `c6` double(22,2) NOT NULL
+  `c6` double NOT NULL,
+  `hasil` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `skripsi_hasiliterasi`
+--
+
+INSERT INTO `skripsi_hasiliterasi` (`id`, `kriteria`, `c1`, `c2`, `c3`, `c4`, `c5`, `c6`, `hasil`) VALUES
+(0, 'c1', 6, 1.5604329004329, 3.3933333333333, 0.8985, 3.01, 6.92, 21.782266233766),
+(0, 'c2', 45.410909090909, 6, 18.453333333333, 4.66, 12.72, 43.65, 130.89424242424),
+(0, 'c3', 16.515151515152, 3.1028138528138, 6, 2.5325, 5.4, 16, 49.550465367965),
+(0, 'c4', 60.272727272727, 10.441558441558, 32.587878787879, 6, 23.660909090909, 67.212121212121, 200.17519480519),
+(0, 'c5', 22.193939393939, 3.1017316017316, 8.0727272727272, 2.5675757575757, 6, 20.363636363636, 62.29961038961),
+(0, 'c6', 5.795670995671, 1.3084415584415, 2.7380952380952, 0.83047619047619, 2.4252380952381, 6, 19.097922077922);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `skripsi_hasil_normalisasi`
+--
+
+CREATE TABLE `skripsi_hasil_normalisasi` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(30) NOT NULL,
+  `batch` int(4) NOT NULL,
+  `C1` float NOT NULL,
+  `C2` float NOT NULL,
+  `C3` float NOT NULL,
+  `C4` float NOT NULL,
+  `C5` float NOT NULL,
+  `C6` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `perbandingan_kriteria`
+-- Dumping data for table `skripsi_hasil_normalisasi`
 --
 
-INSERT INTO `perbandingan_kriteria` (`id`, `kriteria`, `c1`, `c2`, `c3`, `c4`, `c5`, `c6`) VALUES
-(1, 'c1', 1, 4, 3, 4, 3, 3.00),
-(2, 'c2', 0.25, 1, 4, 3, 4, 3.00),
-(3, 'c3', 0.33333333333333, 0.25, 1, 3, 2, 3.00),
-(4, 'c4', 0.25, 0.33333333333333, 0.33333333333333, 1, 3, 2.00),
-(5, 'c5', 0.33333333333333, 0.25, 0.5, 0.33333333333333, 1, 4.00),
-(6, 'c6', 0.25, 0.5, 0.33333333333333, 0.5, 0.25, 1.00);
+INSERT INTO `skripsi_hasil_normalisasi` (`id`, `nama`, `batch`, `C1`, `C2`, `C3`, `C4`, `C5`, `C6`) VALUES
+(22, 'test', 8, 0.75, 1, 1, 0.25, 1, 1),
+(23, 'Syaeful Amri', 8, 0.75, 0.75, 1, 1, 1, 1),
+(24, 'Hello', 8, 1, 0.75, 0.25, 1, 1, 1),
+(25, 'testing', 8, 0.75, 1, 1, 1, 0.75, 0.75),
+(26, 'Calon 1', 9, 1, 1, 1, 1, 0.75, 0.5),
+(27, 'Calon 2', 9, 0.75, 0.75, 0.75, 0.25, 1, 0.75),
+(28, 'Calon 3', 9, 0.75, 0.25, 0.5, 0.25, 0.5, 1),
+(29, 'Calon 4', 9, 0.75, 0.25, 0.25, 1, 0.5, 0.75),
+(30, 'Calon 5', 9, 0.75, 0.75, 1, 1, 0.75, 0.5),
+(31, 'Jessy', 10, 1, 0.75, 0.5, 0.25, 0.75, 0.75),
+(32, 'Indigo Nugra', 10, 1, 0.75, 0.75, 1, 1, 1),
+(33, 'Teresia', 10, 0.666667, 0.5, 0.75, 1, 0.75, 0.75),
+(34, 'syaeful amri', 10, 0.5, 1, 1, 1, 1, 1),
+(35, 'Indigo Nugra', 11, 0.75, 0.75, 0.75, 1, 1, 1),
+(36, 'test', 11, 1, 1, 1, 1, 1, 1),
+(37, 'test', 11, 0.75, 0.5, 1, 1, 0.5, 0.5),
+(38, 'test', 12, 0.5, 1, 1, 1, 1, 1),
+(39, 'hello', 12, 1, 0.75, 1, 1, 1, 0.75),
+(40, 'hayo', 12, 0.5, 0.75, 0.75, 1, 0.666667, 0.5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `skripsi_hasil_perangkingan`
+--
+
+CREATE TABLE `skripsi_hasil_perangkingan` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(30) NOT NULL,
+  `hasil` float DEFAULT NULL,
+  `rangking` int(11) DEFAULT NULL,
+  `batch` int(4) NOT NULL,
+  `C1` float NOT NULL,
+  `C2` float NOT NULL,
+  `C3` float NOT NULL,
+  `C4` float NOT NULL,
+  `C5` float NOT NULL,
+  `C6` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `skripsi_hasil_perangkingan`
+--
+
+INSERT INTO `skripsi_hasil_perangkingan` (`id`, `nama`, `hasil`, `rangking`, `batch`, `C1`, `C2`, `C3`, `C4`, `C5`, `C6`) VALUES
+(26, 'Calon 1', 0.9475, 1, 9, 1, 1, 1, 1, 0.75, 0.5),
+(27, 'Calon 2', 0.5775, 4, 9, 0.75, 0.75, 0.75, 0.25, 1, 0.75),
+(28, 'Calon 3', 0.3625, 5, 9, 0.75, 0.25, 0.5, 0.25, 0.5, 1),
+(29, 'Calon 4', 0.635, 3, 9, 0.75, 0.25, 0.25, 1, 0.5, 0.75),
+(30, 'Calon 5', 0.8675, 2, 9, 0.75, 0.75, 1, 1, 0.75, 0.5),
+(31, 'Jessy', 0.5325, 4, 10, 1, 0.75, 0.5, 0.25, 0.75, 0.75),
+(32, 'Indigo Nugra', 0.9075, 2, 10, 1, 0.75, 0.75, 1, 1, 1),
+(33, 'Teresia', 0.780833, 3, 10, 0.666667, 0.5, 0.75, 1, 0.75, 0.75),
+(34, 'syaeful amri', 0.975, 1, 10, 0.5, 1, 1, 1, 1, 1),
+(35, 'Indigo Nugra', 0.895, 2, 11, 0.75, 0.75, 0.75, 1, 1, 1),
+(36, 'test', 1, 1, 11, 1, 1, 1, 1, 1, 1),
+(37, 'test', 0.7675, 3, 11, 0.75, 0.5, 1, 1, 0.5, 0.5),
+(38, 'test', 0.975, 1, 12, 0.5, 1, 1, 1, 1, 1),
+(39, 'hello', 0.9225, 2, 12, 1, 0.75, 1, 1, 1, 0.75),
+(40, 'hayo', 0.819167, 3, 12, 0.5, 0.75, 0.75, 1, 0.666667, 0.5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `skripsi_kriteria`
+--
+
+CREATE TABLE `skripsi_kriteria` (
+  `id` int(11) NOT NULL,
+  `kriteria` varchar(255) DEFAULT NULL,
+  `jenis` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `skripsi_kriteria`
+--
+
+INSERT INTO `skripsi_kriteria` (`id`, `kriteria`, `jenis`) VALUES
+(1, 'Usia', 'cost'),
+(2, 'Pengalaman Kerja', 'benefit'),
+(3, 'Pendidikan Terakhir', 'benefit'),
+(4, 'Sertifikat Keahlian', 'benefit'),
+(5, 'Wawancara', 'benefit'),
+(6, 'Penampilan', 'benefit');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `skripsi_kriteria_terpilih`
+--
+
+CREATE TABLE `skripsi_kriteria_terpilih` (
+  `id` char(4) NOT NULL,
+  `id_kriteria` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `skripsi_kriteria_terpilih`
+--
+
+INSERT INTO `skripsi_kriteria_terpilih` (`id`, `id_kriteria`) VALUES
+('C1', 1),
+('C2', 2),
+('C3', 3),
+('C4', 4),
+('C5', 5),
+('C6', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `skripsi_nilaikriteria`
+--
+
+CREATE TABLE `skripsi_nilaikriteria` (
+  `id` int(11) NOT NULL DEFAULT 0,
+  `c1_1` decimal(10,2) DEFAULT NULL,
+  `c1_2` decimal(10,2) DEFAULT NULL,
+  `c1_3` decimal(10,2) DEFAULT NULL,
+  `c1_4` decimal(10,2) DEFAULT NULL,
+  `c2_1` decimal(10,2) DEFAULT NULL,
+  `c2_2` decimal(10,2) DEFAULT NULL,
+  `c2_3` decimal(10,2) DEFAULT NULL,
+  `c3_1` decimal(10,2) DEFAULT NULL,
+  `c3_2` decimal(10,2) DEFAULT NULL,
+  `c4_1` decimal(10,2) DEFAULT NULL,
+  `c1_5` decimal(10,2) DEFAULT NULL,
+  `c2_4` decimal(10,2) DEFAULT NULL,
+  `c3_3` decimal(10,2) DEFAULT NULL,
+  `c4_2` decimal(10,2) DEFAULT NULL,
+  `c5_1` decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `skripsi_nilaikriteria`
+--
+
+INSERT INTO `skripsi_nilaikriteria` (`id`, `c1_1`, `c1_2`, `c1_3`, `c1_4`, `c2_1`, `c2_2`, `c2_3`, `c3_1`, `c3_2`, `c4_1`, `c1_5`, `c2_4`, `c3_3`, `c4_2`, `c5_1`) VALUES
+(1, '0.25', '0.20', '0.25', '0.33', '4.00', '0.33', '3.00', '0.25', '0.50', '5.00', '1.00', '7.00', '3.00', '5.00', '4.00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `skripsi_perbandingankriteria`
+--
+
+CREATE TABLE `skripsi_perbandingankriteria` (
+  `id` int(11) NOT NULL DEFAULT 0,
+  `kriteria` varchar(25) CHARACTER SET latin1 NOT NULL,
+  `c1` double NOT NULL,
+  `c2` double NOT NULL,
+  `c3` double NOT NULL,
+  `c4` double NOT NULL,
+  `c5` double NOT NULL,
+  `c6` double(22,2) NOT NULL,
+  `bobot` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `skripsi_perbandingankriteria`
+--
+
+INSERT INTO `skripsi_perbandingankriteria` (`id`, `kriteria`, `c1`, `c2`, `c3`, `c4`, `c5`, `c6`, `bobot`) VALUES
+(0, 'c1', 1, 0.25, 0.2, 0.25, 0.33, 1.00, '0.00'),
+(0, 'c2', 4, 1, 4, 0.33, 3, 7.00, '0.00'),
+(0, 'c3', 5, 0.25, 1, 0.25, 0.5, 3.00, '0.00'),
+(0, 'c4', 4, 3.030303030303, 4, 1, 5, 5.00, '0.00'),
+(0, 'c5', 3.030303030303, 0.33333333333333, 2, 0.2, 1, 4.00, '0.00'),
+(0, 'c6', 1, 0.14285714285714, 0.33333333333333, 0.2, 0.25, 1.00, '0.00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `skripsi_subkriteria`
+--
+
+CREATE TABLE `skripsi_subkriteria` (
+  `id` int(11) NOT NULL,
+  `subkriteria` varchar(255) DEFAULT NULL,
+  `id_kriteria` int(11) DEFAULT NULL,
+  `value` decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `skripsi_subkriteria`
+--
+
+INSERT INTO `skripsi_subkriteria` (`id`, `subkriteria`, `id_kriteria`, `value`) VALUES
+(1, '18-23 Tahun', 1, '1.00'),
+(2, '24-27 Tahun', 1, '0.75'),
+(3, '28-34 Tahun', 1, '0.50'),
+(4, '35 Tahun', 1, '0.25'),
+(10, 'Sangat Baik', 6, '1.00'),
+(11, 'Baik', 6, '0.75'),
+(12, 'Buruk', 6, '0.50'),
+(14, 'Sangat Baik', 5, '1.00'),
+(15, 'Baik', 5, '0.75'),
+(16, 'Buruk', 5, '0.50'),
+(17, 'Sangat Buruk', 5, '0.25'),
+(18, 'Ada', 4, '1.00'),
+(19, 'Tidak Ada', 4, '0.25'),
+(20, 'S1', 3, '1.00'),
+(21, 'D3', 3, '0.75'),
+(22, 'D1/D2', 3, '0.50'),
+(23, 'SMA/SMK', 3, '0.25'),
+(24, '> 5 - 4 Tahun', 2, '1.00'),
+(25, '3 - 2 Tahun', 2, '0.75'),
+(26, '1 Tahun', 2, '0.50'),
+(27, 'Tidak ada', 2, '0.25'),
+(28, 'Sangat Buruk ', 6, '0.25'),
+(29, 'terbaik', 10, '1.00'),
+(30, 'baik doang', 10, '0.50');
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `batch`
---
-ALTER TABLE `batch`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `calon_pegawai`
---
-ALTER TABLE `calon_pegawai`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `calon_pegawai_konversi`
---
-ALTER TABLE `calon_pegawai_konversi`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `calon_penerima_dup`
---
-ALTER TABLE `calon_penerima_dup`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `hasil_bobot_ahp`
---
-ALTER TABLE `hasil_bobot_ahp`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `hasil_iterasi_1`
---
-ALTER TABLE `hasil_iterasi_1`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `hasil_normalisasi`
---
-ALTER TABLE `hasil_normalisasi`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `hasil_perangkingan`
---
-ALTER TABLE `hasil_perangkingan`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `kriteria`
---
-ALTER TABLE `kriteria`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `login`
@@ -534,80 +412,56 @@ ALTER TABLE `login`
   ADD KEY `username` (`username`);
 
 --
--- Indexes for table `lookup_pegawai`
+-- Indexes for table `skripsi_batch`
 --
-ALTER TABLE `lookup_pegawai`
+ALTER TABLE `skripsi_batch`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `nilaikriteria`
+-- Indexes for table `skripsi_calon_pegawai`
 --
-ALTER TABLE `nilaikriteria`
+ALTER TABLE `skripsi_calon_pegawai`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `perbandingan_kriteria`
+-- Indexes for table `skripsi_cpegawai_kriteria`
 --
-ALTER TABLE `perbandingan_kriteria`
+ALTER TABLE `skripsi_cpegawai_kriteria`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `skripsi_hasil_normalisasi`
+--
+ALTER TABLE `skripsi_hasil_normalisasi`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `skripsi_hasil_perangkingan`
+--
+ALTER TABLE `skripsi_hasil_perangkingan`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `skripsi_kriteria`
+--
+ALTER TABLE `skripsi_kriteria`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `skripsi_kriteria_terpilih`
+--
+ALTER TABLE `skripsi_kriteria_terpilih`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `skripsi_subkriteria`
+--
+ALTER TABLE `skripsi_subkriteria`
   ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
-
---
--- AUTO_INCREMENT for table `batch`
---
-ALTER TABLE `batch`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `calon_pegawai`
---
-ALTER TABLE `calon_pegawai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
---
--- AUTO_INCREMENT for table `calon_pegawai_konversi`
---
-ALTER TABLE `calon_pegawai_konversi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1992;
-
---
--- AUTO_INCREMENT for table `calon_penerima_dup`
---
-ALTER TABLE `calon_penerima_dup`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
-
---
--- AUTO_INCREMENT for table `hasil_bobot_ahp`
---
-ALTER TABLE `hasil_bobot_ahp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `hasil_iterasi_1`
---
-ALTER TABLE `hasil_iterasi_1`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `hasil_normalisasi`
---
-ALTER TABLE `hasil_normalisasi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1992;
-
---
--- AUTO_INCREMENT for table `hasil_perangkingan`
---
-ALTER TABLE `hasil_perangkingan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1992;
-
---
--- AUTO_INCREMENT for table `kriteria`
---
-ALTER TABLE `kriteria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `login`
@@ -616,22 +470,46 @@ ALTER TABLE `login`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `lookup_pegawai`
+-- AUTO_INCREMENT for table `skripsi_batch`
 --
-ALTER TABLE `lookup_pegawai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+ALTER TABLE `skripsi_batch`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `nilaikriteria`
+-- AUTO_INCREMENT for table `skripsi_calon_pegawai`
 --
-ALTER TABLE `nilaikriteria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `skripsi_calon_pegawai`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
--- AUTO_INCREMENT for table `perbandingan_kriteria`
+-- AUTO_INCREMENT for table `skripsi_cpegawai_kriteria`
 --
-ALTER TABLE `perbandingan_kriteria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+ALTER TABLE `skripsi_cpegawai_kriteria`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `skripsi_hasil_normalisasi`
+--
+ALTER TABLE `skripsi_hasil_normalisasi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1992;
+
+--
+-- AUTO_INCREMENT for table `skripsi_hasil_perangkingan`
+--
+ALTER TABLE `skripsi_hasil_perangkingan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1992;
+
+--
+-- AUTO_INCREMENT for table `skripsi_kriteria`
+--
+ALTER TABLE `skripsi_kriteria`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `skripsi_subkriteria`
+--
+ALTER TABLE `skripsi_subkriteria`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -8,21 +8,26 @@
                 <div class="row mb-3">
                     <div class="col-md-12 mx-auto">
 
-                        <p><?php echo $this->session->flashdata('Pesan') ?> </p> 
-                        <form action="<?php echo base_url() ?>laporan/laporanperangkingan" method="post">
-                                
+                        <form action="<?php echo base_url() ?>laporan/generate" method="post" target="_blank">
+                            <div class="row mb-3">
+                            
                                 <div class="col-md-6">
-                                    <label for="">Pilih Tahun Data Yang Akan Dicetak</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <select name="tahun" class="form-control" >
-                                        <option value="2019">2019</option>
-                                        <option value="2016">2016</option>
-                                        <option value="2017">2017</option>
-                                        <option value="2018">2018</option>
+                                    <label for="">Pilih Batch Data Rangking</label>
+                                    <select name="batch" class="form-control" required>
+                                        <option value="">Pilih Batch</option>
+                                        <?php 
+                                            if(!empty($batches)){
+                                                foreach($batches as $batch){
+                                        ?>
+                                        <option value="<?=$batch->id?>"><?=$batch->batch?></option>
+                                        <?php
+                                                }
+                                            }
+                                        ?>
                                     </select>
-                                </div><br><br>
-                                <input type="submit" class="btn btn-sm btn-primary" value="LAPORAN HASIL PERANGKINGAN "> 
+                                </div>
+                            </div>
+                            <input type="submit" class="btn btn-sm btn-primary" value="Submit"> 
 
                         </form>
                     </div>

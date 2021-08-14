@@ -55,6 +55,7 @@ class Skripsikriteria extends CI_Controller {
         elseif ($mau_ke == "aksi_add") {
             $data = array(
                 'kriteria'      => $this->input->post('kriteria'),
+                'jenis'         => $this->input->post('jenis')
             );
 
             $this->db->where('id',$id);
@@ -73,6 +74,7 @@ class Skripsikriteria extends CI_Controller {
         elseif ($mau_ke == "aksi_edit") {
             $data = array(
                 'kriteria'      => $this->input->post('kriteria'),
+                'jenis'         => $this->input->post('jenis')
             );
 
             $this->model->get_update('skripsi_kriteria',$this->input->post('id'), $data);

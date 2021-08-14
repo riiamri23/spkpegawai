@@ -17,7 +17,7 @@
                 <i class="mdi mdi-home link-icon"></i>
             </a>
         </li>
-        <li>
+        <!-- <li>
             <a href="#kriteria" data-toggle="collapse" aria-expanded="false">
                 <span class="link-title">Kriteria</span>
                 <i class="mdi mdi-file-document link-icon"></i>
@@ -36,7 +36,7 @@
                     <a href="<?=base_url()?>pembobotan">Pembobotan Kriteria AHP</a>
                 </li>
             </ul>
-        </li>
+        </li> -->
         <li>
             <a href="#kriteria" data-toggle="collapse" aria-expanded="false">
                 <span class="link-title">Kriteria</span>
@@ -45,6 +45,18 @@
             <ul class="collapse navigation-submenu" id="kriteria">
                 <li>
                     <a href="<?=base_url()?>skripsikriteria" >Kriteria</a>
+                </li>
+                <li>
+                    <a href="<?=base_url()?>skriteriap">Kriteria Terpilih</a>
+                </li>
+                <li>
+                    <a href="<?=base_url()?>skriterian">Nilai Kriteria</a>
+                </li>
+                <li>
+                    <a href="<?=base_url()?>spkriteria">Perbandingan Kriteria</a>
+                </li>
+                <li>
+                    <a href="<?=base_url()?>sahpkriteria">Pembobotan Kriteria</a>
                 </li>
             </ul>
         </li>
@@ -67,7 +79,14 @@
             <!-- </li> -->
         <!-- </ul> -->
         </li>
+        <!-- <li>
         
+            <a href="<?=base_url()?>sbatch">
+                <span class="link-title">Data Calon Pegawai</span>
+                <i class="mdi mdi-file-document link-icon"></i>
+            </a>
+        </li>
+         -->
         <li>
             <a href="<?=base_url()?>perangkingan"><span class="link-title">Proses Perangkingan</span>
             <i class="mdi mdi-file-document link-icon"></i></a>
@@ -76,16 +95,16 @@
             <a href="<?=base_url()?>hasilperangkingan"><span class="link-title">Hasil Perangkingan</span><i class="mdi mdi-file-document link-icon"></i></a>
         </li>
         
-        <!-- <li>
-            <a href="<?=base_url()?>laporan"><span class="link-title">Laporan</span><i class="mdi mdi-file-document link-icon"></i></a>
-        </li> -->
-        <li class="nav-category-divider">info</li>
         <li>
+            <a href="<?=base_url()?>laporan"><span class="link-title">Laporan</span><i class="mdi mdi-file-document link-icon"></i></a>
+        </li>
+        <li class="nav-category-divider">info</li>
+        <!-- <li>
             <a href="<?=base_url()?>user">
                 <span class="link-title">User</span>
                 <i class="mdi mdi-asterisk link-icon"></i>
             </a>
-        </li>
+        </li> -->
         <li>
             <a href="<?=base_url() ?>login/keluar">
                 <span class="link-title">Logout</span>

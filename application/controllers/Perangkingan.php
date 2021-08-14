@@ -4,7 +4,7 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 class Perangkingan extends CI_Controller {
-    var $tabelBatch = "batch";
+    var $tabelBatch = "skripsi_batch";
 
     public function __construct() {
         parent::__construct();
@@ -35,59 +35,46 @@ class Perangkingan extends CI_Controller {
     public function proses()
     {
         $batch = $this->input->post('batch');
-
-        $c1=$this->db->get_where('hasil_bobot_ahp', array('kode' => "c1"))->row()->bobot;
-        $c2=$this->db->get_where('hasil_bobot_ahp', array('kode' => "c2"))->row()->bobot;
-        $c3=$this->db->get_where('hasil_bobot_ahp', array('kode' => "c3"))->row()->bobot;
-        $c4=$this->db->get_where('hasil_bobot_ahp', array('kode' => "c4"))->row()->bobot;
-        $c5=$this->db->get_where('hasil_bobot_ahp', array('kode' => "c5"))->row()->bobot;
-        $c6=$this->db->get_where('hasil_bobot_ahp', array('kode' => "c6"))->row()->bobot;
+        $bobotahp = $this->model->get_where('skripsi_bobotahp');
+        // print_r($bobotahp);
 
         $this->db->where('batch',$batch);  
-        $data = $this->db->get('hasil_normalisasi');
+        $data = $this->db->get('skripsi_hasil_normalisasi');
         // var_dump($data->result());
         if ($data->num_rows() > 0) {
-           $this->model->delete_dum('hasil_perangkingan',$batch);
+           $this->model->delete_dum('skripsi_hasil_perangkingan',$batch);
             foreach ($data->result() as $row) {
-                $nama = $row->nama;
-                $nc1 = $row->usia;
-                $nc2 = $row->pengalaman;
-                $nc3 = $row->pendidikan;
-                $nc4 = $row->sertifikat;
-                $nc5 = $row->wawancara;
-                $nc6 = $row->penampilan;
-                // var_dump($nc1);
+                $data= array();
+                $hasil = 0;
+                foreach($row as $key =>$val){
+                    if (preg_match('/[0-9]/', $key)){
+                        // print_r(strtolower($key));
+                        foreach($bobotahp as $k => $v){
+                            // print_r($v->kode);
+                            if(strtolower($key) == $v->kode)
+                                $hasil += $val*$v->bobot;
+                        }
+                        $data[$key] = $val;
 
-                $hasil = ($c1*$nc1)+($c2*$nc2)+($c3*$nc3)+($c4*$nc4)+($c5*$nc5)+($c6*$nc6);
-                // var_dump($hasil);
-                  $data = array(
-                    'id'            => $row->id,
-                    'batch'         => $batch,
-                    'nama'          => $nama,
-                    'usia'          => $nc1,
-                    'pengalaman'    => $nc2,
-                    'pendidikan'    => $nc3,
-                    'sertifikat'    => $nc4,
-                    'wawancara'     => $nc5,
-                    'penampilan'    => $nc6,
-                    'hasil'         => number_format((float)$hasil, 3, '.', '')
-                      
-                );
-                var_dump($data);
-        
-                $this->model->get_insert('hasil_perangkingan',$data);
+                    }else{
+                        $data[$key] = $val;
+                    }
+                }
+                $data['hasil'] = $hasil;
+
+                // echo "<br>";
+                $this->model->get_insert('skripsi_hasil_perangkingan',$data);
             }
 
-            $dt_hasil = $this->db->query("SELECT * FROM hasil_perangkingan WHERE batch = '$batch' ORDER BY hasil desc");
+            $dt_hasil = $this->db->query("SELECT * FROM skripsi_hasil_perangkingan WHERE batch = '$batch' ORDER BY hasil desc");
             if ($dt_hasil->num_rows() > 0) {
                 $num = 1;
                 foreach ($dt_hasil->result() as $dt) {
-                    $idku = $dt->id;
                     $rangking = $num;
-                    $this->db->query("UPDATE hasil_perangkingan SET rangking = '$rangking' WHERE id = $idku");
+                    $this->db->query("UPDATE skripsi_hasil_perangkingan SET rangking = '$rangking' WHERE id = ". $dt->id);
                     $num++;
                 }
-            }      
+            }   
 
         }
     

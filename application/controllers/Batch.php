@@ -4,8 +4,8 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 class Batch extends CI_Controller {
-    var $tabel= 'batch';
-    var $tabel2 = 'calon_pegawai'; //variabel tabel 
+    var $tabel= 'skripsi_batch';
+    var $tabel2 = 'skripsi_calon_pegawai'; //variabel tabel 
 
     public function __construct() {
         parent::__construct();

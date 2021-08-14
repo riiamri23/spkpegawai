@@ -18,6 +18,13 @@ class Model extends CI_Model {
         }
     }
 
+    /*
+    EXAMPLE USAGE
+    $this->model->get_where('skripsi_kriteria_terpilih', [], 
+        ['skripsi_kriteria'=> 'skripsi_kriteria_terpilih.id_kriteria = skripsi_kriteria.id']
+    );
+
+    */
     function get_where($tabel, $wheres = array(), $joins = array(), $select = '*') {
         $this->db->select($select);
         $this->db->from($tabel);
@@ -119,14 +126,44 @@ class Model extends CI_Model {
             return $query->result();
         }
     }
+
+    //new function for bobot & eigen
+
+    function get_bobot2()
+    {
+        $sql = "SELECT n.kriteria as nama_kriteria, p.*,a.bobot FROM skripsi_bobotahp a 
+        LEFT JOIN skripsi_perbandingankriteria p ON p.kriteria = a.kode
+        LEFT JOIN skripsi_kriteria_terpilih k ON k.id = a.kode 
+        LEFT JOIN skripsi_kriteria n ON n.id = k.id_kriteria
+        order by a.kode asc";
+        $query = $this->db->query($sql); 
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        }
+    }
+
+    public function get_eigen2(){
+
+        $sql="SELECT a.*,
+            (SELECT SUM(hasil)hasil FROM skripsi_hasiliterasi) as total_hasil,
+            p.bobot
+             FROM skripsi_hasiliterasi a
+            LEFT JOIN skripsi_bobotahp p ON p.kode = a.kriteria
+            ORDER BY a.kriteria asc";
+         $query = $this->db->query($sql); 
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        }
+    }
+
      function getdatarangkingawal($batch=1)
     {
       $where = " 1=1 ";
       if ($batch!=null) {
           $where.=" and a.batch = '$batch'";
       }
-      $sql="SELECT a.*,h.hasil,h.rangking FROM calon_pegawai a 
-      LEFT JOIN hasil_perangkingan h ON h.id = a.id
+      $sql="SELECT a.*,h.hasil,h.rangking FROM skripsi_calon_pegawai a 
+      LEFT JOIN skripsi_hasil_perangkingan h ON h.id = a.id
       where $where
       ORDER BY h.rangking ASC";
 

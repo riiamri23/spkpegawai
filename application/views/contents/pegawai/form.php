@@ -1,33 +1,16 @@
 
 <?php
-$kriterias = array(
-    "wawancara"=> ["Sangat Buruk", "Buruk", "Cukup", "Baik", "Sangat Baik"], 
-    "pendidikan" => ["SMA/SMK", "D3", "S1"], 
-    "pengalaman"=>["Belum Ada/Freshgraduate", "1 - < 2 Tahun", "> 2 Tahun"], 
-    "penampilan"=> ["Sangat Buruk", "Buruk", "Cukup", "Baik", "Sangat Baik"],
-    "sertifikat"=> ["Tidak Ada", "Ada"],
-);
 if ($aksi == 'aksi_add') {
     $id = "";
     // $batch = "";
     $nama = "";
-    $usia = "";
-    $valkriterias = ['', '', '', '', ''];
 } else {
-    foreach ($qdata as $rowdata) {
-        $id = $rowdata->id;
+    // foreach ($qdata as $rowdata) {
+        $id = $qdata->id;
         // $batch = $rowdata->batch;
-        $nama = $rowdata->nama;
-        $valkriterias = [
-            $rowdata->wawancara, 
-            $rowdata->pendidikan, 
-            $rowdata->pengalaman, 
-            $rowdata->penampilan, 
-            $rowdata->sertifikat
-        ];
-
-        $usia = $rowdata->usia;
-    }
+        $nama = $qdata->nama;
+    // }
+    
 
 }
 ?> 
@@ -72,42 +55,34 @@ if ($aksi == 'aksi_add') {
                                 </td>
                             </tr> 
                             <?php 
-                                $counter = 0;
-                                foreach($kriterias as $kriteria => $value){
-                                    ?>
-                                    <tr> 
-                                        <td><?=ucwords($kriteria)?></td> 
-                                        <td> 
-                                            <div class="col-sm-6">
-                                                <select name="<?=$kriteria?>" class="form-control" required>
-                                                        <?php 
-                                                            if(!empty($value)){
-                                                                foreach($value as $val){
-                                                        ?>
-                                                        <option value="<?=$val?>" <?=$valkriterias[$counter] == $val ? 'selected':''?>><?=$val?></option>
-            
-                                                        <?php 
-                                                                }
-                                                            }
-                                                        ?>
-            
-                                                </select>
-                                            </div>
-                                        </td> 
-                                    </tr> 
+                                foreach($kriteria as $val){
+                                    // $subval->value==$qdata->$$val->id?'selected':''
+                                    $valkriteria = !empty($qdata) ? $qdata->{$val['id']} : 0;
+                            ?>
+                                <tr> 
+                                    <td><?=$val['kriteria']?></td> 
+                                    <td> 
+                                        <div class="col-sm-6"> 
+                                                <select name="<?=$val['id']?>" class="form-control" required>
+                                                    <option value="">Pilih</option>
+                                                    <?php 
+                                                        foreach($val['subkriteria'] as $subval){
+                                                    ?>
 
-                                    <?php
-                                $counter++;
+                                                        <option value="<?=$subval->value?>" <?=$subval->value == $valkriteria ? 'selected':''?>><?=$subval->subkriteria?></option>
+                                                    <?php
+
+                                                        }
+                                                    ?>
+                                                </select>
+                                        </div>
+                                    </td>
+                                </tr> 
+
+                            <?php
+
                                 }
                             ?>
-                            <tr> 
-                                <td>Usia</td> 
-                                <td> 
-                                    <div class="col-sm-6"> 
-                                        <input type="number" name="usia" required class="form-control" value="<?php echo $usia ?>"> 
-                                    </div>
-                                </td>
-                            </tr> 
                             <tr> 
                                 <td colspan="2">
                                     <input type="submit" class="btn btn-success" value="Simpan"> 

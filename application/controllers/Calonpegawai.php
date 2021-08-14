@@ -4,8 +4,8 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 class Calonpegawai extends CI_Controller {
-     var $tabel = 'calon_pegawai'; //variabel tabel 
-     var $tabelBatch = "batch";
+     var $tabel = 'skripsi_calon_pegawai'; //variabel tabel 
+     var $tabelBatch = "skripsi_batch";
 
     public function __construct() {
         parent::__construct();
@@ -24,7 +24,26 @@ class Calonpegawai extends CI_Controller {
             redirect('batch');
         }
         $data['title'] = 'Data Calon Pegawai';
-        $data['data'] = $this->model->get_where($this->tabel, ["batch"=> $batch]);
+        // $data['data'] = $this->model->get_where($this->tabel, ["batch"=> $batch]);
+        // $kriteria = $this->model->get_where('skripsi_kriteria');
+        $kriteria = $this->model->get_where('skripsi_kriteria_terpilih', [], 
+            ['skripsi_kriteria'=> 'skripsi_kriteria_terpilih.id_kriteria = skripsi_kriteria.id']
+        );    
+        $query = "SELECT a.nama, b.batch, a.batch as id_batch, a.id, ";
+
+        $i = 1;
+        
+        foreach($kriteria as $key => $val){
+            $as = preg_replace('/\s+/', '_',strtolower($val->kriteria));
+            $query2 = "(select subkriteria from skripsi_subkriteria where id_kriteria = {$val->id} AND value = a.C{$i} LIMIT 1)";
+            $query .="{$query2} as {$as}";
+            if (next($kriteria)==true) $query .= ", ";
+            $i++;
+        }
+
+        $query = $query . " from {$this->tabel} a left join {$this->tabelBatch} b on a.batch = b.id where a.batch =" . $batch;
+        $data['data'] = $this->db->query($query)->result();
+        // print_r($data['data']);
         // $this->load->view('vcalonpegawai', $data);
         $data['batch'] = $batch;
         $data['page'] = 'contents/pegawai/index';
@@ -58,10 +77,31 @@ class Calonpegawai extends CI_Controller {
             }
             $data['title'] = 'Tambah Calon Pegawai';
             $data['aksi'] = 'aksi_add';
+            $data['qdata'] = $this->model->get_byid($this->tabel,'0');
+
             $data['batch'] = $this->input->get('batch');
-            $data['batches'] = $this->model->get_all($this->tabelBatch);
-            // print_r($data['batches']);
-            // $this->load->view('vformcalonpegawai', $data);
+            $kriteria = $this->model->get_where('skripsi_kriteria_terpilih', 
+                [], 
+                ['skripsi_kriteria'=> 'skripsi_kriteria_terpilih.id_kriteria = skripsi_kriteria.id'],
+                'skripsi_kriteria_terpilih.id, skripsi_kriteria.kriteria, skripsi_kriteria.id as id_kriteria'
+            );
+
+            $dataKriteria = array();
+            foreach($kriteria as $val){
+
+                $subkriteria = $this->model->get_where('skripsi_subkriteria', ["id_kriteria"=> $val->id_kriteria]);
+
+                array_push($dataKriteria, array(
+                    'id'            => $val->id,
+                    'kriteria'      => $val->kriteria,
+                    'id_kriteria'   => $val->id_kriteria,
+                    'subkriteria'   => $subkriteria
+                ));
+            }
+
+            $data['kriteria'] = $dataKriteria;
+            // print_r($data['kriteria']);
+
             $data['page'] = 'contents/pegawai/form';
     
             $this->load->view('app.php', $data);
@@ -70,28 +110,48 @@ class Calonpegawai extends CI_Controller {
             if($this->input->get('batch') == null){
                 redirect('batch');
             }
-            $data['qdata'] = $this->model->get_byid($this->tabel,$idu);
+            $data['qdata'] = $this->model->get_byid($this->tabel,$idu)[0];
             $data['title'] = 'Edit Calon Pegawai';
             $data['aksi']  = 'aksi_edit';
+            // print_r($data['qdata']);
+
             $data['batch'] = $this->input->get('batch');
-            $data['batches'] = $this->model->get_all($this->tabelBatch);
+            $kriteria = $this->model->get_where('skripsi_kriteria_terpilih', 
+                [], 
+                ['skripsi_kriteria'=> 'skripsi_kriteria_terpilih.id_kriteria = skripsi_kriteria.id'],
+                'skripsi_kriteria_terpilih.id, skripsi_kriteria.kriteria, skripsi_kriteria.id as id_kriteria'
+            );
+
+            $dataKriteria = array();
+            foreach($kriteria as $val){
+
+                $subkriteria = $this->model->get_where('skripsi_subkriteria', ["id_kriteria"=> $val->id_kriteria]);
+
+                array_push($dataKriteria, array(
+                    'id'            => $val->id,
+                    'kriteria'      => $val->kriteria,
+                    'id_kriteria'   => $val->id_kriteria,
+                    'subkriteria'   => $subkriteria
+                ));
+            }
+
+            $data['kriteria'] = $dataKriteria;
+
             $data['page'] = 'contents/pegawai/form';
     
             $this->load->view('app.php', $data);
         } 
         elseif ($mau_ke == "aksi_add") {
             // jika uri segmentasinya AKSI_ADD sebagai fungsi untuk insert data
-              $data = array(
-                'nama'      => $nama,
-                'batch'     => $batch,
-
-                'usia'      => $usia,
-                'pengalaman' => $pengalaman,
-                'pendidikan'=> $pendidikan,
-                'sertifikat'  => $sertifikat,
-                'wawancara'  => $wawancara,
-                'penampilan'  => $penampilan,
-                  
+            $data = array(
+                'nama'      => $this->input->post('nama'),
+                'batch'     => $this->input->post('batch'),
+                'C1'        => $this->input->post('C1'),
+                'C2'        => $this->input->post('C2'),
+                'C3'        => $this->input->post('C3'),
+                'C4'        => $this->input->post('C4'),
+                'C5'        => $this->input->post('C5'),
+                'C6'        => $this->input->post('C6'),
             );
 
              $this->db->where('id',$id);
@@ -107,16 +167,15 @@ class Calonpegawai extends CI_Controller {
             }
         } elseif ($mau_ke == "aksi_edit") {
             // jika uri segmentnya aksi_edit sebagai fungsi untuk update
-              $data = array(
-                'nama'      => $nama,
-                'batch'     => $batch,
-                'usia'      => $usia,
-                'pengalaman' => $pengalaman,
-                'pendidikan'=> $pendidikan,
-                'sertifikat'  => $sertifikat,
-                'wawancara'  => $wawancara,
-                'penampilan'  => $penampilan,
-                  
+            $data = array(
+                'nama'      => $this->input->post('nama'),
+                'batch'     => $this->input->post('batch'),
+                'C1'        => $this->input->post('C1'),
+                'C2'        => $this->input->post('C2'),
+                'C3'        => $this->input->post('C3'),
+                'C4'        => $this->input->post('C4'),
+                'C5'        => $this->input->post('C5'),
+                'C6'        => $this->input->post('C6'),
             );
             // var_dump($data);
             // var_dump($id);

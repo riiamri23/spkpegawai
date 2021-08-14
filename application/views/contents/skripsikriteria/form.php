@@ -3,10 +3,12 @@
 if ($aksi == 'aksi_add') {
     $id = "";
     $kriteria = '';
+    $jenis = '';
 } else {
     // print_r($data);
     $id = $data->id;
     $kriteria = $data->kriteria;
+    $jenis = $data->jenis;
 }
 ?>
 <div class="col-lg-12">
@@ -25,6 +27,18 @@ if ($aksi == 'aksi_add') {
                                     <td> 
                                         <div class="col-sm-6"> 
                                             <input type="text" name="kriteria" required class="form-control" value="<?=$kriteria?>"> 
+                                        </div>
+                                    </td>
+                                </tr> 
+                                <tr> 
+                                    <td>Jenis</td> 
+                                    <td> 
+                                        <div class="col-sm-6"> 
+                                                <select name="jenis" class="form-control" required>
+                                                    <option value="">Pilih</option>
+                                                    <option value="benefit" <?='benefit'== $jenis ? 'selected':''?>>benefit</option>
+                                                    <option value="cost" <?='cost'== $jenis ? 'selected':''?>>cost</option>
+                                                </select>
                                         </div>
                                     </td>
                                 </tr> 

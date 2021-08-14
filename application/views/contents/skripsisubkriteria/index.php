@@ -35,8 +35,8 @@
                                         <td><?=$row->subkriteria?></td>
                                         <td><?=$row->value?></td>
                                         <td>
-                                            <a href="<?php echo base_url() ?>skripsisubkriteria/form/edit/<?=$row->id?>" class="btn btn-info btn-sm"><i class="mdi mdi-pencil"></i></a> 
-                                            <a href="<?php echo base_url() ?>skripsisubkriteria/hapus/<?=$row->id?>" class="btn btn-danger btn-sm" onclick="return confirm('Anda Yakin menghapus data ini?')"><i class="mdi mdi-delete"></i></a>
+                                            <a href="<?php echo base_url() ?>skripsisubkriteria/form/edit/<?=$row->id?>?kriteria=<?=$kriteria?>" class="btn btn-info btn-sm"><i class="mdi mdi-pencil"></i></a> 
+                                            <a href="<?php echo base_url() ?>skripsisubkriteria/hapus/<?=$row->id?>?kriteria=<?=$kriteria?>" class="btn btn-danger btn-sm" onclick="return confirm('Anda Yakin menghapus data ini?')"><i class="mdi mdi-delete"></i></a>
                                         </td>
                                     </tr>
 

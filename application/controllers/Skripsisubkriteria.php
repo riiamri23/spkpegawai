@@ -31,55 +31,67 @@ class Skripsisubkriteria extends CI_Controller {
     }
 
     public function form(){
+        
         // ambil variable url
         $mau_ke = $this->uri->segment(3);
         $idu = $this->uri->segment(4);
         
-        // ambil variabel dari form
-        $kriteria = $this->input->post('kriteria');
         if ($mau_ke == "add") {
+            if($this->input->get('kriteria') == null){
+                redirect('skripsisubkriteria');
+            }
             $data['title'] = 'Tambah Subkriteria';
             $data['aksi'] = 'aksi_add';
             $data['page'] = 'contents/skripsisubkriteria/form';
+            $data['kriteria'] = $this->input->get('kriteria');
     
             $this->load->view('app.php', $data);
         } 
         elseif ($mau_ke == "edit") {
+            if($this->input->get('kriteria') == null){
+                redirect('skripsisubkriteria');
+            }
             $data['title'] = 'Edit Subkriteria';
             $data['aksi'] = 'aksi_edit';
             $data['page'] = 'contents/skripsisubkriteria/form';
+            $data['kriteria'] = $this->input->get('kriteria');
             
-            $data['data'] = $this->model->get_byid('skripsi_kriteria',$idu)[0];
+            $data['data'] = $this->model->get_byid('skripsi_subkriteria',$idu)[0];
     
             $this->load->view('app.php', $data);
 
         }
         elseif ($mau_ke == "aksi_add") {
             $data = array(
-                'kriteria'      => $this->input->post('kriteria'),
+                'subkriteria'       => $this->input->post('subkriteria'),
+                'id_kriteria'       => $this->input->post('kriteria'),
+                'value'             => $this->input->post('value'),
             );
 
-            $this->db->where('id',$id);
-            $cek = $this->db->get('skripsi_kriteria');
+            $this->db->where('id', $this->input->post('id'));
+            $cek = $this->db->get('skripsi_subkriteria');
             if ($cek->num_rows()>0) {
+
                 $this->session->set_flashdata("Pesan", "<div class=\"alert alert-success\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Ada yang salah</div>");
-               redirect('skripsisubkriteria');
+               redirect('skripsisubkriteria?kriteria' . $this->input->post('kriteria'));
              }else{
     
-                $this->model->get_insert('skripsi_kriteria',$data);
+                $this->model->get_insert('skripsi_subkriteria',$data);
 
                 $this->session->set_flashdata("Pesan", "<div class=\"alert alert-success\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data berhasil di Simpan</div>");
-                redirect('skripsisubkriteria');
+                redirect('skripsisubkriteria?kriteria='. $this->input->post('kriteria'));
             }
         }
         elseif ($mau_ke == "aksi_edit") {
             $data = array(
-                'kriteria'      => $this->input->post('kriteria'),
+                'subkriteria'       => $this->input->post('subkriteria'),
+                'id_kriteria'       => $this->input->post('kriteria'),
+                'value'             => $this->input->post('value'),
             );
 
-            $this->model->get_update('skripsi_kriteria',$this->input->post('id'), $data);
+            $this->model->get_update('skripsi_subkriteria',$this->input->post('id'), $data);
             $this->session->set_flashdata("Pesan", "<div class=\"alert alert-success\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data berhasil di Updsate</div>");
-            redirect('skripsisubkriteria');
+            redirect('skripsisubkriteria?kriteria='. $this->input->post('kriteria'));
 
         }
 
@@ -90,9 +102,9 @@ class Skripsisubkriteria extends CI_Controller {
         // if($this->input->get('batch') == null){
         //     redirect('batch');
         // }
-        $this->model->delete('skripsi_kriteria',$gid);
+        $this->model->delete('skripsi_subkriteria',$gid);
         $this->session->set_flashdata("Pesan", "<div class=\"alert alert-success\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data berhasil di Hapus</div>");
-        redirect('skripsisubkriteria');
+        redirect('skripsisubkriteria?kriteria=' . $this->input->get('kriteria'));
     }
     
 }
